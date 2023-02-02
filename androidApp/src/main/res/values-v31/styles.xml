@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <style name="AppTheme.SplashScreen">
+    <item name="android:windowSplashScreenBackground">@color/branco</item>
+    <item name="android:windowSplashScreenAnimatedIcon">@drawable/jupiter</item>
+    <item name="android:windowSplashScreenAnimationDuration">5000</item>
+    //Tempo que ficará nessa tela
+    <item name="postSplashScreenTheme">@style/AppTheme</item>
+    //depois volta para a tela AppTheme
+  </style>
+</resources>

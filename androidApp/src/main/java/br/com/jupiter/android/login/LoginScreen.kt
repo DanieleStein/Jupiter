@@ -25,16 +25,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.jupiter.android.MyApplicationTheme
-import br.com.jupiter.android.R
+import br.com.jupiter.android.components.BottomBar
+
 
 @Composable
 fun LoginScreen() {
   MyApplicationTheme() {
-    Surface(modifier = Modifier.fillMaxSize(), color = Color(0xFF0051EF)) {
+    Scaffold(bottomBar = { BottomBar(title = "Entrar")}, backgroundColor = Color(0xFF0051EF)) {
       Column(//Tudo da coluna vai ficar alinhado na vertical da tela e na horizontal
-        modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(it)
       ) {
         val email = remember { mutableStateOf(TextFieldValue()) } //Lembrar valor informado na ultima vez
         val senha = remember { mutableStateOf(TextFieldValue()) }
@@ -51,6 +52,7 @@ fun LoginScreen() {
 
         Spacer(modifier = Modifier.height(60.dp))
         Text(text = "EMAIL", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White)
+
 
         OutlinedTextField(
           modifier = Modifier
@@ -87,7 +89,7 @@ fun LoginScreen() {
         Row(
           verticalAlignment = Alignment.CenterVertically
         ) {
-          Button(onClick = { /*TODO*/ }, modifier = Modifier.background(Color(0xFF20B2AA))) {
+          Button(onClick = { /*TODO*/ }) {
             Text(text = "CADASTRAR CONTA", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = Color.White)
           }
           Spacer(modifier = Modifier.weight(1f))

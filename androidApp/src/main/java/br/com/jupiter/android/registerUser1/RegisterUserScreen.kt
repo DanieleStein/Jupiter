@@ -1,4 +1,4 @@
-package br.com.jupiter.android.registerUser
+package br.com.jupiter.android.registerUser1
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -28,7 +28,7 @@ fun RegisterUserScreen () {
   MyApplicationTheme() {
     Scaffold(
       topBar = { TopBar(title = "JUPITER") },
-      bottomBar = { BottomBar(title = "CONFIRMAR") }
+      bottomBar = { BottomBar(title = "CONTINUAR") }
     ) {
 
       Column(
@@ -55,7 +55,7 @@ fun RegisterUserScreen () {
           label = { Text(text = "Nome Completo") },
           value = nome.value,
           onValueChange = {nome.value = it},
-          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email))
+          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text))
 
         Spacer(modifier = Modifier.height(15.dp))
         OutlinedTextField(
@@ -75,7 +75,7 @@ fun RegisterUserScreen () {
           label = { Text(text = "Senha") },
           value = senha.value,
           onValueChange = {senha.value = it},
-          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email))
+          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password))
 
         Spacer(modifier = Modifier.height(15.dp))
         OutlinedTextField(
@@ -85,7 +85,7 @@ fun RegisterUserScreen () {
           label = { Text(text = "Data de Nascimento") },
           value = dataNascimento.value,
           onValueChange = {dataNascimento.value = it},
-          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email))
+          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
 
         Spacer(modifier = Modifier.height(15.dp))
         OutlinedTextField(
@@ -95,7 +95,7 @@ fun RegisterUserScreen () {
           label = { Text(text = "CPF") },
           value = cpf.value,
           onValueChange = {cpf.value = it},
-          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email))
+          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
 
       }
     }
@@ -104,6 +104,6 @@ fun RegisterUserScreen () {
 
 @Preview
 @Composable
-fun RegisterUserThemePreview() {
+fun RegisterUserScreenPreview() {
   RegisterUserScreen()
 }

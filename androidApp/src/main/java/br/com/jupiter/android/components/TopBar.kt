@@ -38,7 +38,19 @@ fun TopBarPerfil(title: String) {
         Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.White)
       }
     },
+
     actions = {
+      IconButton(onClick = {}) {
+        Image(
+          painter = painterResource(R.drawable.baseline_search_24),
+          contentDescription = "Profile",
+          contentScale = ContentScale.Fit,
+          modifier = Modifier
+            .height(40.dp)
+            .clip(CircleShape)
+        )
+      }
+
       IconButton(onClick = {}) {
         Image(
           painter = painterResource(R.drawable.ic_profile2),
@@ -49,6 +61,7 @@ fun TopBarPerfil(title: String) {
             .clip(CircleShape)
         )
       }
+
     },
     backgroundColor = Color(0xFF0051EF)
   )

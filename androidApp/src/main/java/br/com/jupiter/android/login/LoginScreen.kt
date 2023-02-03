@@ -31,11 +31,11 @@ import br.com.jupiter.android.components.BottomBar
 @Composable
 fun LoginScreen() {
   MyApplicationTheme() {
-    Scaffold(bottomBar = { BottomBar(title = "Entrar")}, backgroundColor = Color(0xFF0051EF)) {
+    Scaffold(bottomBar = { BottomBar(title = "ENTRAR")}, backgroundColor = Color(0xFF0051EF)) {
       Column(//Tudo da coluna vai ficar alinhado na vertical da tela e na horizontal
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(it)
+        modifier = Modifier.padding(it).padding(horizontal = 16.dp, vertical = 16.dp)
       ) {
         val email = remember { mutableStateOf(TextFieldValue()) } //Lembrar valor informado na ultima vez
         val senha = remember { mutableStateOf(TextFieldValue()) }
@@ -46,7 +46,7 @@ fun LoginScreen() {
           //contentDescription = "Profile",
           //modifier = Modifier
         //)
-
+        Spacer(modifier = Modifier.height(180.dp))
         Text(text = "JUPITER", fontWeight = FontWeight.Bold, fontSize = 32.sp, color = Color.White)
         Text(text = "A PLATAFORMA DAS PLATAFORMAS", fontSize =16.sp, color = Color.White)
 

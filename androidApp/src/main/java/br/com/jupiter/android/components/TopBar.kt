@@ -24,7 +24,7 @@ import br.com.jupiter.android.R
 @Composable
 fun TopBar(title: String) {
   TopAppBar(
-    title = { Text(text = title, fontWeight = FontWeight.Bold, fontSize = 24.sp, color = Color.White) },
+    title = { Text(text = title, fontWeight = FontWeight.Bold, fontSize = 36.sp, color = Color.White) },
     backgroundColor = Color(0xFF0051EF)
   )
 }
@@ -32,7 +32,7 @@ fun TopBar(title: String) {
 @Composable
 fun TopBarPerfil(title: String) {
   TopAppBar(
-    title = { Text(text = title, fontWeight = FontWeight.Bold, fontSize = 24.sp, color = Color.White) },
+    title = { Text(text = title, fontWeight = FontWeight.Bold, fontSize = 36.sp, color = Color.White) },
     navigationIcon = {
       IconButton(onClick = {}) {
         Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.White)

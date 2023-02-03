@@ -1,4 +1,4 @@
-package br.com.jupiter.android.RegisterUser
+package br.com.jupiter.android.registerUser
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

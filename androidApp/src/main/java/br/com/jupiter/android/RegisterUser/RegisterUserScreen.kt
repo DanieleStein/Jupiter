@@ -45,7 +45,7 @@ fun RegisterUserScreen () {
         Text(text = "Passo 1 de 3", fontWeight = FontWeight.Bold, fontSize = 18.sp)
 
         Spacer(modifier = Modifier.height(30.dp))
-        Text(text = "DADOS PESSOAIS", fontWeight = FontWeight.Bold, fontSize = 25.sp)
+        Text(text = "DADOS PESSOAIS", fontWeight = FontWeight.Bold, fontSize = 22.sp)
 
         Spacer(modifier = Modifier.height(30.dp))
         OutlinedTextField(

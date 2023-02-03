@@ -1,6 +1,5 @@
 package br.com.jupiter.android.login
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -14,8 +13,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -35,7 +32,9 @@ fun LoginScreen() {
       Column(//Tudo da coluna vai ficar alinhado na vertical da tela e na horizontal
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(it).padding(horizontal = 16.dp, vertical = 16.dp)
+        modifier = Modifier
+          .padding(it)
+          .padding(horizontal = 30.dp, vertical = 30.dp)
       ) {
         val email = remember { mutableStateOf(TextFieldValue()) } //Lembrar valor informado na ultima vez
         val senha = remember { mutableStateOf(TextFieldValue()) }
@@ -46,13 +45,14 @@ fun LoginScreen() {
           //contentDescription = "Profile",
           //modifier = Modifier
         //)
-        Spacer(modifier = Modifier.height(180.dp))
+        Spacer(modifier = Modifier.height(150.dp))
         Text(text = "JUPITER", fontWeight = FontWeight.Bold, fontSize = 32.sp, color = Color.White)
         Text(text = "A PLATAFORMA DAS PLATAFORMAS", fontSize =16.sp, color = Color.White)
 
         Spacer(modifier = Modifier.height(60.dp))
-        Text(text = "EMAIL", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White)
-
+        Text(text = "EMAIL", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White, modifier = Modifier
+          .padding()
+          .fillMaxWidth())
 
         OutlinedTextField(
           modifier = Modifier
@@ -64,7 +64,10 @@ fun LoginScreen() {
         )
 
         Spacer(modifier = Modifier.height(20.dp))
-        Text(text = "SENHA", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White)
+        Text(text = "SENHA", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White, modifier = Modifier
+          .padding()
+          .fillMaxWidth())
+
         OutlinedTextField(
           modifier = Modifier
             .fillMaxWidth()
@@ -85,16 +88,16 @@ fun LoginScreen() {
             }
           }
         )
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(4.dp))
         Row(
           verticalAlignment = Alignment.CenterVertically
         ) {
-          Button(onClick = { /*TODO*/ }) {
-            Text(text = "CADASTRAR CONTA", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = Color.White)
+          TextButton(onClick = { /*TODO*/ }) {
+            Text(text = "CADASTRAR CONTA", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Color.White)
           }
           Spacer(modifier = Modifier.weight(1f))
-          Button(onClick = { /*TODO*/ }, modifier = Modifier.background(Color(0xFF20B2AA))) {
-            Text(text = "ESQUECI SENHA", fontWeight = FontWeight.Bold, fontSize = 12.sp, color = Color.White)
+          TextButton(onClick = { /*TODO*/ }) {
+            Text(text = "ESQUECI SENHA", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Color.White)
           }
         }
       }

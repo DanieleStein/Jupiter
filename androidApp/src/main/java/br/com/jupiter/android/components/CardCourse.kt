@@ -3,8 +3,7 @@ package br.com.jupiter.android.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,21 +26,25 @@ import kotlin.math.absoluteValue
 fun CardCourse(curso: String) {
   Column(
     modifier = Modifier
-      .background(Color(0xFF0051EF))
+      .background(Color(0xFFCF4215))
       .height(116.dp)
       .padding(horizontal = 23.dp, vertical = 23.dp)
       .fillMaxWidth()
   ) {
-    Row(
-      verticalAlignment = Alignment.CenterVertically
-    ) {
-      Column() {
-        Image(
-          painter = painterResource(id = R.drawable.porqueinho),
-          contentDescription = "Dinheiro")
+    TextButton(onClick = { /*TODO*/ }) {
+      Row(
+        verticalAlignment = Alignment.CenterVertically
+      ) {
+
+        Column() {
+          Image(
+            painter = painterResource(id = R.drawable.porqueinho),
+            contentDescription = "Dinheiro"
+          )
+        }
+        Spacer(modifier = Modifier.weight(1f))
+        Text(curso, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White)
       }
-      Spacer(modifier = Modifier.weight(1f))
-      Text(curso, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White)
     }
   }
 }

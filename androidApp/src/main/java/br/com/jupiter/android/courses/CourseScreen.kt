@@ -30,6 +30,7 @@ fun CourseScreen() {
   MyApplicationTheme() {
     Scaffold(
       topBar = { TopBarPerfil(title = "JUPITER") },
+      containerColor = Color.Black,
     ) {
 
 
@@ -42,10 +43,10 @@ fun CourseScreen() {
              .padding(20.dp),//Espaço entre as bordas do Texto
            verticalAlignment = Alignment.CenterVertically //alinhados na vertical
          ) {
-           Text(text = "FINANÇAS", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+           Text(text = "FINANÇAS", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.White)
            Spacer(modifier = Modifier.weight(1f)) //espaço entre a escrita e a seta
            IconButton(onClick = { /*TODO*/ }) {
-             Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.Black)
+             Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.White)
            }
          }
        }
@@ -60,10 +61,10 @@ fun CourseScreen() {
              .padding(20.dp),//Espaço entre as bordas do Texto
            verticalAlignment = Alignment.CenterVertically //alinhados na vertical
          ) {
-           Text(text = "FINANÇAS", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+           Text(text = "FINANÇAS", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.White)
            Spacer(modifier = Modifier.weight(1f)) //espaço entre a escrita e a seta
            IconButton(onClick = { /*TODO*/ }) {
-             Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.Black)
+             Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.White)
            }
          }
        }
@@ -78,10 +79,10 @@ fun CourseScreen() {
              .padding(20.dp),//Espaço entre as bordas do Texto
            verticalAlignment = Alignment.CenterVertically //alinhados na vertical
          ) {
-           Text(text = "FINANÇAS", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+           Text(text = "FINANÇAS", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.White)
            Spacer(modifier = Modifier.weight(1f)) //espaço entre a escrita e a seta
            IconButton(onClick = { /*TODO*/ }) {
-             Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.Black)
+             Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.White)
            }
          }
        }
@@ -96,10 +97,10 @@ fun CourseScreen() {
              .padding(20.dp),//Espaço entre as bordas do Texto
            verticalAlignment = Alignment.CenterVertically //alinhados na vertical
          ) {
-           Text(text = "FINANÇAS", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+           Text(text = "FINANÇAS", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.White)
            Spacer(modifier = Modifier.weight(1f)) //espaço entre a escrita e a seta
            IconButton(onClick = { /*TODO*/ }) {
-             Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.Black)
+             Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.White)
            }
          }
        }
@@ -114,10 +115,10 @@ fun CourseScreen() {
              .padding(20.dp),//Espaço entre as bordas do Texto
            verticalAlignment = Alignment.CenterVertically //alinhados na vertical
          ) {
-           Text(text = "MAIS CURSOS", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+           Text(text = "MAIS CURSOS", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.White)
            Spacer(modifier = Modifier.weight(1f)) //espaço entre a escrita e a seta
            IconButton(onClick = { /*TODO*/ }) {
-             Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.Black)
+             Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.White)
            }
          }
        }

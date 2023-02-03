@@ -3,7 +3,6 @@ package br.com.jupiter.android.RegisterUser
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.BottomAppBar
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -11,7 +10,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -43,13 +41,13 @@ fun RegisterUserScreen () {
         val dataNascimento = remember { mutableStateOf(TextFieldValue()) }
         val cpf = remember { mutableStateOf(TextFieldValue()) }
 
-        Spacer(modifier = Modifier.height(70.dp))
+        Spacer(modifier = Modifier.height(40.dp))
         Text(text = "Passo 1 de 3", fontWeight = FontWeight.Bold, fontSize = 18.sp)
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(30.dp))
         Text(text = "DADOS PESSOAIS", fontWeight = FontWeight.Bold, fontSize = 25.sp)
 
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(30.dp))
         OutlinedTextField(
           modifier = Modifier
             .fillMaxWidth()

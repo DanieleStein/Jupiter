@@ -1,5 +1,6 @@
 package br.com.jupiter.android.login
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
@@ -13,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -22,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.jupiter.android.MyApplicationTheme
+import br.com.jupiter.android.R
 import br.com.jupiter.android.components.BottomBar
 
 
@@ -36,24 +39,24 @@ fun LoginScreen() {
           .padding(it)
           .padding(horizontal = 30.dp, vertical = 30.dp)
       ) {
+
         val email = remember { mutableStateOf(TextFieldValue()) } //Lembrar valor informado na ultima vez
         val senha = remember { mutableStateOf(TextFieldValue()) }
         val senhavisivel = remember { mutableStateOf(false) }
 
-        //Image( //Vai ser uma imagem
-          //painter = painterResource(R.drawable.jupiter),
-          //contentDescription = "Profile",
-          //modifier = Modifier
-        //)
-        Spacer(modifier = Modifier.height(150.dp))
-        Text(text = "JUPITER", fontWeight = FontWeight.Bold, fontSize = 32.sp, color = Color.White)
-        Text(text = "A PLATAFORMA DAS PLATAFORMAS", fontSize =16.sp, color = Color.White)
 
-        Spacer(modifier = Modifier.height(60.dp))
+        Spacer(modifier = Modifier.height(100.dp))
+        Image(
+          painter = painterResource(R.drawable.jupiterlogin3),
+          contentDescription = "Profile",
+          modifier = Modifier)
+
+        Spacer(modifier = Modifier.height(10.dp))
         Text(text = "EMAIL", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White, modifier = Modifier
           .padding()
           .fillMaxWidth())
 
+        Spacer(modifier = Modifier.height(5.dp))
         OutlinedTextField(
           modifier = Modifier
             .fillMaxWidth()
@@ -68,6 +71,7 @@ fun LoginScreen() {
           .padding()
           .fillMaxWidth())
 
+        Spacer(modifier = Modifier.height(5.dp))
         OutlinedTextField(
           modifier = Modifier
             .fillMaxWidth()

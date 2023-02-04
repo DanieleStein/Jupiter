@@ -33,7 +33,6 @@ fun CourseScreen() {
       containerColor = Color(0xFF20B2AA),
     ) {
 
-
       Spacer(modifier = Modifier.height(50.dp))
      LazyColumn(modifier = Modifier.padding(it)) {
 

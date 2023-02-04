@@ -30,7 +30,7 @@ fun CourseScreen() {
   MyApplicationTheme() {
     Scaffold(
       topBar = { TopBarPerfil(title = "JUPITER") },
-      containerColor = Color.Black,
+      containerColor = Color(0xFF20B2AA),
     ) {
 
 

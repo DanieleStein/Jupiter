@@ -26,7 +26,7 @@ fun ContentScreen() {
   MyApplicationTheme() {
     Scaffold(
       topBar = { TopBarPerfil(title = "JUPITER") },
-      containerColor = Color.Black,
+      containerColor = Color(0xFF20B2AA),
     ) {
 
       val ordemConteudo = 1

@@ -2,6 +2,7 @@ package br.com.jupiter.android.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -16,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
+import androidx.navigation.compose.rememberNavController
 import br.com.jupiter.android.R
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -23,13 +25,16 @@ import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import kotlin.math.absoluteValue
 
 @Composable
-fun CardCourse(curso: String) {
+fun CardCourse(curso: String, onCardNavigation: () -> Unit) {
   Column(
     modifier = Modifier
       .background(Color(0xFFCF4215))
       .height(116.dp)
       .padding(horizontal = 23.dp, vertical = 23.dp)
       .fillMaxWidth()
+      .clickable {
+        onCardNavigation.invoke()
+      }
   ) {
     TextButton(onClick = { /*TODO*/ }) {
       Row(
@@ -52,6 +57,8 @@ fun CardCourse(curso: String) {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun CardCourseGroup() {
+  val navController = rememberNavController()
+
   HorizontalPager(
     count = 4,
     contentPadding = PaddingValues(horizontal = 32.dp),
@@ -59,6 +66,7 @@ fun CardCourseGroup() {
       page ->
     val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
     Card(
+
       contentColor = Color.White,
       modifier = Modifier.graphicsLayer {
         lerp(
@@ -69,9 +77,10 @@ fun CardCourseGroup() {
           scaleY = it
           scaleX = it
         }
+
       }
     ) {
-      CardCourse(curso = "CURSO DE FUNDOS DE INVESTIMENTO")
+      CardCourse(curso = "CURSO DE FUNDOS DE INVESTIMENTO") {}
 
     }
   }
@@ -80,7 +89,7 @@ fun CardCourseGroup() {
 @Preview
 @Composable
 fun CardCoursePreview() {
-  CardCourse("CURSO DE FUNDOS DE INVESTIMENTO")
+  CardCourse("CURSO DE FUNDOS DE INVESTIMENTO"){}
 }
 
 @Preview

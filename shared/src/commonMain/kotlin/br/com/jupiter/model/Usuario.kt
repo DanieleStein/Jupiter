@@ -1,12 +1,12 @@
 package br.com.jupiter.model
 
 data class Usuario(
-    val id: Long,
-    val nome: String,
-    val email: String,
-    val senha: String,
-    val cpf: String,
-    val dataNascimento: String,
-    val cartao: MutableList<Cartao>?,
-    val pedido: MutableList<Pedido>?
+    var id: Long,
+    var nome: String,
+    var email: String,
+    var senha: String,
+    var cpf: String,
+    var dataNascimento: String,
+    var cartao: List<Cartao>,
+    var pedido: List<Pedido>
 )

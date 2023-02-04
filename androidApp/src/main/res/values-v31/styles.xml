@@ -2,8 +2,8 @@
 <resources>
 
   <style name="AppTheme.SplashScreen">
-    <item name="android:windowSplashScreenBackground">@color/branco</item>
-    <item name="android:windowSplashScreenAnimatedIcon">@drawable/jupiter</item>
+    <item name="android:windowSplashScreenBackground">@color/blue</item>
+    <item name="android:windowSplashScreenAnimatedIcon">@drawable/jupiterbrancotransp2</item>
     <item name="android:windowSplashScreenAnimationDuration">5000</item>
     //Tempo que ficará nessa tela
     <item name="postSplashScreenTheme">@style/AppTheme</item>

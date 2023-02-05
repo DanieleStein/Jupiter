@@ -18,82 +18,93 @@ import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
 import androidx.navigation.compose.rememberNavController
+import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.R
+import br.com.jupiter.model.Categorias
+import br.com.jupiter.model.Conteudo
+import br.com.jupiter.model.Curso
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import kotlin.math.absoluteValue
 
 @Composable
-fun CardCourse(curso: String, onCardNavigation: () -> Unit) {
-  Column(
-    modifier = Modifier
-      .background(Color(0xFFCF4215))
-      .height(116.dp)
-      .padding(horizontal = 23.dp, vertical = 23.dp)
-      .fillMaxWidth()
-      .clickable {
-        onCardNavigation.invoke()
-      }
-  ) {
-    TextButton(onClick = { /*TODO*/ }) {
-      Row(
-        verticalAlignment = Alignment.CenterVertically
-      ) {
+fun CardCourse(curso: String, onNavigateDetails: (Curso) -> Unit = {}) {
+    Column(
+        modifier = Modifier
+            .background(Color(0xFFCF4215))
+            .height(116.dp)
+            .padding(horizontal = 23.dp, vertical = 23.dp)
+            .fillMaxWidth()
+            .clickable {
+                //
+            }
+    ) {
+        TextButton(onClick = {
+            println("Entrei")
+            //onNavigateDetails.invoke(curso)
+        }) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
-        Column() {
-          Image(
-            painter = painterResource(id = R.drawable.porqueinho),
-            contentDescription = "Dinheiro"
-          )
+                Column() {
+                    Image(
+                        painter = painterResource(id = R.drawable.porqueinho),
+                        contentDescription = "Dinheiro"
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                Text(
+                    curso,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+            }
         }
-        Spacer(modifier = Modifier.weight(1f))
-        Text(curso, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White)
-      }
     }
-  }
 }
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun CardCourseGroup() {
-  val navController = rememberNavController()
+fun CardCourseGroup(categoria: String) {
 
-  HorizontalPager(
-    count = 4,
-    contentPadding = PaddingValues(horizontal = 32.dp),
-    modifier = Modifier.height(125.dp)) {
-      page ->
-    val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
-    Card(
+    val cursos: List<Curso> = Mock.listaDeCursos
+    val cursosFiltrados: List<Curso> = cursos.filter { it.curso.toString() == categoria }
 
-      contentColor = Color.White,
-      modifier = Modifier.graphicsLayer {
-        lerp(
-          start = 0.90f,
-          stop = 1f,
-          fraction = 1f - pageOffset.coerceIn(0f, 1f)
-        ).also {
-          scaleY = it
-          scaleX = it
+    HorizontalPager(
+        count = cursosFiltrados.size,
+        contentPadding = PaddingValues(horizontal = 32.dp),
+        modifier = Modifier.height(125.dp)
+    ) { page ->
+        val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
+        Card(
+            contentColor = Color.White,
+            modifier = Modifier.graphicsLayer {
+                lerp(
+                    start = 0.90f,
+                    stop = 1f,
+                    fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                ).also {
+                    scaleY = it
+                    scaleX = it
+                }
+            }
+        ) {
+            CardCourse(curso = cursosFiltrados[page].titulo) {}
         }
-
-      }
-    ) {
-      CardCourse(curso = "CURSO DE FUNDOS DE INVESTIMENTO") {}
-
     }
-  }
 }
 
 @Preview
 @Composable
 fun CardCoursePreview() {
-  CardCourse("CURSO DE FUNDOS DE INVESTIMENTO"){}
+    CardCourse("Curso sobre Finanças") {}
 }
 
 @Preview
 @Composable
 fun CardCourseGroupPreview() {
-  CardCourseGroup()
+    CardCourseGroup(Categorias.FII.name)
 }

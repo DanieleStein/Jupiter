@@ -1,5 +1,6 @@
 package br.com.jupiter.Objects
 
+import br.com.jupiter.model.Categorias
 import br.com.jupiter.model.Conteudo
 import br.com.jupiter.model.Criador
 import br.com.jupiter.model.Curso
@@ -56,17 +57,35 @@ object Mock {
         conteudo1, conteudo2, conteudo3, conteudo4
     )
 
-    val curso: Curso = Curso(
+    val curso1: Curso = Curso(
         id = 1,
-        curso = "Curso de Fundos de Investimento",
-        titulo = "Curso sobre SpringBoot",
-        descricao = "Esse curso ensina",
+        curso = Categorias.FINANÇAS,
+        titulo = "Curso sobre Finanças",
+        descricao = "Esse curso ensina sobre finanças",
+        conteudo = listaDeConteudo,
+        criador = criador
+    )
+
+    val curso2: Curso = Curso(
+        id = 2,
+        curso = Categorias.FINANÇAS,
+        titulo = "Curso sobre Finanças Empresarial",
+        descricao = "Esse curso ensina sobre finanças Empresarial",
+        conteudo = listaDeConteudo,
+        criador = criador
+    )
+
+    val curso3: Curso = Curso(
+        id = 3,
+        curso = Categorias.FII,
+        titulo = "Curso sobre Fundo Imobiliário",
+        descricao = "Esse curso ensina sobre Fundo Imobiliário",
         conteudo = listaDeConteudo,
         criador = criador
     )
 
     val listaDeCursos: List<Curso> = listOf(
-        curso, curso
+        curso1, curso2, curso3
     )
 
 

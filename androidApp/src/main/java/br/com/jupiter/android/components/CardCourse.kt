@@ -10,11 +10,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
 import androidx.navigation.compose.rememberNavController
@@ -28,7 +29,7 @@ import kotlin.math.absoluteValue
 fun CardCourse(curso: String, onCardNavigation: () -> Unit) {
   Column(
     modifier = Modifier
-      .background(Color(0xFFCF4215))
+      .background(Color.Black)
       .height(116.dp)
       .padding(horizontal = 23.dp, vertical = 23.dp)
       .fillMaxWidth()
@@ -40,19 +41,45 @@ fun CardCourse(curso: String, onCardNavigation: () -> Unit) {
       Row(
         verticalAlignment = Alignment.CenterVertically
       ) {
-
         Column() {
           Image(
             painter = painterResource(id = R.drawable.porqueinho),
             contentDescription = "Dinheiro"
           )
         }
-        Spacer(modifier = Modifier.weight(1f))
-        Text(curso, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White)
+        Text(curso, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White,textAlign = TextAlign.Center)
       }
     }
   }
 }
+
+@Composable
+fun CardCourse2(curso: String, onCardNavigation: () -> Unit) {
+  Column(
+    modifier = Modifier
+      .background(Color.Black)
+      .height(90.dp)
+      .width(180.dp)
+  ) {
+    TextButton(onClick = { /*TODO*/ }) {
+      Row(
+        verticalAlignment = Alignment.CenterVertically
+      ) {
+        Column() {
+          Image(
+            painter = painterResource(id = R.drawable.porqueinho),
+            contentDescription = "Dinheiro",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.height(60.dp)
+          )
+        }
+        Text(curso, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White,textAlign = TextAlign.Center)
+      }
+    }
+  }
+}
+
+
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -66,7 +93,6 @@ fun CardCourseGroup() {
       page ->
     val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
     Card(
-
       contentColor = Color.White,
       modifier = Modifier.graphicsLayer {
         lerp(
@@ -81,7 +107,6 @@ fun CardCourseGroup() {
       }
     ) {
       CardCourse(curso = "CURSO DE FUNDOS DE INVESTIMENTO") {}
-
     }
   }
 }
@@ -96,4 +121,12 @@ fun CardCoursePreview() {
 @Composable
 fun CardCourseGroupPreview() {
   CardCourseGroup()
+}
+
+@Preview
+@Composable
+fun CardCourse2Preview() {
+  CardCourse2(curso = "Curso de fundos de Investimento") {
+
+  }
 }

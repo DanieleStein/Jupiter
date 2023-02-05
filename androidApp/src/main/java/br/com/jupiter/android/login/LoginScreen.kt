@@ -3,7 +3,9 @@ package br.com.jupiter.android.login
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
@@ -23,29 +25,45 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.R
+import br.com.jupiter.android.components.AlertDialogComponent
 import br.com.jupiter.android.components.BottomBar
+import br.com.jupiter.model.Login
 
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+  onHomeNavigate: () -> Unit, onCreateNavigate: () -> Unit) {
+  val email = remember { mutableStateOf(TextFieldValue()) } //Lembrar valor informado na ultima vez
+  val senha = remember { mutableStateOf(TextFieldValue()) }
+  val senhavisivel = remember { mutableStateOf(false) }
+  val showDialog = remember { mutableStateOf(false) }
+
   MyApplicationTheme() {
-    Scaffold(bottomBar = { BottomBar(title = "ENTRAR")}, backgroundColor = Color(0xFF0051EF)) {
+    Scaffold(bottomBar = { BottomBar(title = "ENTRAR", onClick = {
+      val login = Login(email = email.value.text, senha = senha.value.text)
+      if (login.validacao()){
+        onHomeNavigate.invoke()
+      } else {
+        showDialog.value = true
+      }
+    })  }, backgroundColor = Color(0xFF0051EF)) {
       Column(//Tudo da coluna vai ficar alinhado na vertical da tela e na horizontal
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
           .padding(it)
           .padding(horizontal = 30.dp, vertical = 30.dp)
+          .verticalScroll(rememberScrollState())
       ) {
 
-        val email = remember { mutableStateOf(TextFieldValue()) } //Lembrar valor informado na ultima vez
-        val senha = remember { mutableStateOf(TextFieldValue()) }
-        val senhavisivel = remember { mutableStateOf(false) }
 
 
-        Spacer(modifier = Modifier.height(100.dp))
+
+
+        Spacer(modifier = Modifier.height(10.dp))
         Image(
           painter = painterResource(R.drawable.jupiterlogin3),
           contentDescription = "Profile",
@@ -96,14 +114,24 @@ fun LoginScreen() {
         Row(
           verticalAlignment = Alignment.CenterVertically
         ) {
-          TextButton(onClick = { /*TODO*/ }) {
+          TextButton(onClick = { onCreateNavigate.invoke() }) {
             Text(text = "CADASTRAR CONTA", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Color.White)
           }
           Spacer(modifier = Modifier.weight(1f))
-          TextButton(onClick = { /*TODO*/ }) {
+          TextButton(onClick = {
+
+          }) {
             Text(text = "ESQUECI SENHA", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Color.White)
           }
         }
+
+        AlertDialogComponent(
+          openDialog = showDialog.value,
+          title = "Erro",
+          message = "Login e/ou senha errada!",
+          onDismissRequest = { showDialog.value = false }
+        )
+
       }
     }
   }
@@ -112,5 +140,5 @@ fun LoginScreen() {
 @Preview
 @Composable
 fun LoginScreenPreview() {
-  LoginScreen()
+  LoginScreen({ },{ })
 }

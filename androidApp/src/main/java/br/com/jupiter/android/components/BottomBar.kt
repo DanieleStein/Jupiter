@@ -17,9 +17,9 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun BottomBar(title: String) {
+fun BottomBar(title: String, onClick: () -> Unit) {
   BottomAppBar(backgroundColor = Color(0xFF20B2AA)) {
-    TextButton(onClick = { /*TODO*/ }) {
+    TextButton(onClick = onClick) {
       Text(text = title, fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color.White, textAlign = TextAlign.Right, modifier = Modifier.fillMaxWidth())
     }
   }
@@ -28,5 +28,5 @@ fun BottomBar(title: String) {
 @Preview
 @Composable
 fun BottomBarPreview() {
-  BottomBar("Entrar")
+  BottomBar("Entrar") {}
 }

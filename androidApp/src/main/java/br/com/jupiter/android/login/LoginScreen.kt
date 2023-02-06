@@ -50,7 +50,7 @@ fun LoginScreen(
         showDialog.value = true
       }
     })  }, backgroundColor = Color(0xFF0051EF)) {
-      Column(//Tudo da coluna vai ficar alinhado na vertical da tela e na horizontal
+      Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -59,11 +59,7 @@ fun LoginScreen(
           .verticalScroll(rememberScrollState())
       ) {
 
-
-
-
-
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(100.dp))
         Image(
           painter = painterResource(R.drawable.jupiterlogin3),
           contentDescription = "Profile",

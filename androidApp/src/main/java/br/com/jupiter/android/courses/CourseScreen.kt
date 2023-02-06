@@ -33,14 +33,11 @@ fun CourseScreen() {
       containerColor = Color(0xFF20B2AA),
     ) {
 
-
-      Spacer(modifier = Modifier.height(50.dp))
-     LazyColumn(modifier = Modifier.padding(it)) {
+      LazyColumn(modifier = Modifier.padding(it)) {
 
        item {
          Row(
-           modifier = Modifier
-             .padding(20.dp),//Espaço entre as bordas do Texto
+           modifier = Modifier.padding(20.dp),//Espaço entre as bordas do Texto
            verticalAlignment = Alignment.CenterVertically //alinhados na vertical
          ) {
            Text(text = "FINANÇAS", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.White)

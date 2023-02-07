@@ -32,7 +32,7 @@ fun CourseScreen2(categoria: String) {
   MyApplicationTheme() {
     Scaffold(
       topBar = { TopBarCourse(titulo = "JUPITER") },
-      containerColor = Color(0xFF20B2AA)
+      containerColor = Color.Black
     ) {
 
       LazyColumn(modifier = Modifier

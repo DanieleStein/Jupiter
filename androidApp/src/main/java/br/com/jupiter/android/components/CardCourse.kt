@@ -32,20 +32,23 @@ import kotlin.math.absoluteValue
 @Composable
 fun CardCourse(curso: String, onCardNavigation: () -> Unit) {
     Column(
+        verticalArrangement = Arrangement.Center,
         modifier = Modifier
-            .background(Color.Black)
-            .height(116.dp)
-            .padding(horizontal = 23.dp, vertical = 23.dp)
-            .fillMaxWidth()
-            .clickable {
-                onCardNavigation.invoke()
-            }
+          .background(Color.White)
+          .height(116.dp)
+          .fillMaxWidth()
+          .padding()
+          .clickable {
+            onCardNavigation.invoke()
+          }
     ) {
         TextButton(onClick = { /*TODO*/ }) {
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column() {
+                Column(
+                  horizontalAlignment = Alignment.CenterHorizontally
+                ) {
                     Image(
                         painter = painterResource(id = R.drawable.porqueinho),
                         contentDescription = "Dinheiro",
@@ -53,11 +56,12 @@ fun CardCourse(curso: String, onCardNavigation: () -> Unit) {
                         modifier = Modifier.height(60.dp)
                     )
                 }
+              Spacer(modifier = Modifier.width(25.dp))
                 Text(
                     curso,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White,
+                    color = Color.Black,
                     textAlign = TextAlign.Center
                 )
             }

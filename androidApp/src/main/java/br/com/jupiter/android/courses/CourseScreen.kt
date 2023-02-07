@@ -31,7 +31,7 @@ fun CourseScreen() {
     MyApplicationTheme() {
         Scaffold(
             topBar = { TopBarPerfil(title = "JUPITER") },
-            containerColor = Color(0xFF20B2AA),
+            containerColor = Color.Black,
         ) {
 
             LazyColumn(modifier = Modifier.padding(it)) {

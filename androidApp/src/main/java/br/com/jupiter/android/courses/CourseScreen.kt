@@ -2,7 +2,6 @@ package br.com.jupiter.android.courses
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Icon
@@ -34,22 +33,11 @@ fun CourseScreen() {
             containerColor = Color(0xFF20B2AA),
         ) {
 
+            LazyColumn(modifier = Modifier.padding(it)) {
 
-      LazyColumn(modifier = Modifier.padding(it)) {
+                val categorias: Array<Categorias> = Categorias.values()
 
-       item {
-         Row(
-           modifier = Modifier.padding(20.dp),//Espaço entre as bordas do Texto
-           verticalAlignment = Alignment.CenterVertically //alinhados na vertical
-         ) {
-           Text(text = "FINANÇAS", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.White)
-           Spacer(modifier = Modifier.weight(1f)) //espaço entre a escrita e a seta
-           IconButton(onClick = { /*TODO*/ }) {
-             Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.White)
-           }
-         }
-       }
-
+                for (categoria in categorias) {
 
                     item {
                         Row(
@@ -73,12 +61,13 @@ fun CourseScreen() {
                     item {
                         CardCourseGroup(categoria.name)
                     }
+
                 }
             }
         }
     }
-
 }
+
 
 @Preview
 @Composable

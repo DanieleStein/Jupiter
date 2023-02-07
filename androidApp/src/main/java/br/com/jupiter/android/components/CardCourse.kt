@@ -31,85 +31,100 @@ import kotlin.math.absoluteValue
 
 @Composable
 fun CardCourse(curso: String, onCardNavigation: () -> Unit) {
-  Column(
-    modifier = Modifier
-      .background(Color.Black)
-      .height(116.dp)
-      .padding(horizontal = 23.dp, vertical = 23.dp)
-      .fillMaxWidth()
-      .clickable {
-        onCardNavigation.invoke()
-      }
-  ) {
-    TextButton(onClick = { /*TODO*/ }) {
-      Row(
-        verticalAlignment = Alignment.CenterVertically
-      ) {
-        Column() {
-          Image(
-            painter = painterResource(id = R.drawable.porqueinho),
-            contentDescription = "Dinheiro"
-          )
+    Column(
+        modifier = Modifier
+            .background(Color.Black)
+            .height(116.dp)
+            .padding(horizontal = 23.dp, vertical = 23.dp)
+            .fillMaxWidth()
+            .clickable {
+                onCardNavigation.invoke()
+            }
+    ) {
+        TextButton(onClick = { /*TODO*/ }) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column() {
+                    Image(
+                        painter = painterResource(id = R.drawable.porqueinho),
+                        contentDescription = "Dinheiro"
+                    )
+                }
+                Text(
+                    curso,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
-        Text(curso, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White,textAlign = TextAlign.Center)
-      }
     }
 }
 
 @Composable
 fun CardCourse2(curso: String, onCardNavigation: () -> Unit) {
-  Column(
-    modifier = Modifier
-      .background(Color.Black)
-      .height(90.dp)
-      .width(180.dp)
-  ) {
-    TextButton(onClick = { /*TODO*/ }) {
-      Row(
-        verticalAlignment = Alignment.CenterVertically
-      ) {
-        Column() {
-          Image(
-            painter = painterResource(id = R.drawable.porqueinho),
-            contentDescription = "Dinheiro",
-            contentScale = ContentScale.Fit,
-            modifier = Modifier.height(60.dp)
-          )
+    Column(
+        modifier = Modifier
+            .background(Color.Black)
+            .height(90.dp)
+            .width(180.dp)
+    ) {
+        TextButton(onClick = { /*TODO*/ }) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column() {
+                    Image(
+                        painter = painterResource(id = R.drawable.porqueinho),
+                        contentDescription = "Dinheiro",
+                        contentScale = ContentScale.Fit,
+                        modifier = Modifier.height(60.dp)
+                    )
+                }
+                Text(
+                    curso,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
-        Text(curso, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White,textAlign = TextAlign.Center)
-      }
     }
-  }
 }
-
 
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun CardCourseGroup(categoria: String) {
 
+    val cursos: List<Curso> = Mock.listaDeCursos
+    val cursosFiltrados: List<Curso> = cursos.filter { it.curso.toString() == categoria }
 
-  HorizontalPager(
-    count = 4,
-    contentPadding = PaddingValues(horizontal = 32.dp),
-    modifier = Modifier.height(125.dp)) {
-      page ->
-    val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
-    Card(
-      contentColor = Color.White,
-      modifier = Modifier.graphicsLayer {
-        lerp(
-          start = 0.90f,
-          stop = 1f,
-          fraction = 1f - pageOffset.coerceIn(0f, 1f)
-        ).also {
-          scaleY = it
-          scaleX = it
+    HorizontalPager(
+        count = cursosFiltrados.size,
+        contentPadding = PaddingValues(horizontal = 32.dp),
+        modifier = Modifier.height(125.dp)
+    ) { page ->
+        val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
+        Card(
+            contentColor = Color.White,
+            modifier = Modifier.graphicsLayer {
+                lerp(
+                    start = 0.90f,
+                    stop = 1f,
+                    fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                ).also {
+                    scaleY = it
+                    scaleX = it
+                }
+
+            }
+        ) {
+            CardCourse(curso = cursosFiltrados[page].titulo) {}
         }
-
-      }
-    ) {
-      CardCourse(curso = "CURSO DE FUNDOS DE INVESTIMENTO") {}
     }
 }
 
@@ -128,7 +143,7 @@ fun CardCourseGroupPreview() {
 @Preview
 @Composable
 fun CardCourse2Preview() {
-  CardCourse2(curso = "Curso de fundos de Investimento") {
+    CardCourse2(curso = "Curso de fundos de Investimento") {
 
-  }
+    }
 }

@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.CardCourse
-import br.com.jupiter.android.components.CardCourse2
+import br.com.jupiter.android.components.TopBarCourse
 import br.com.jupiter.android.components.TopBarPerfil
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -28,11 +28,13 @@ import br.com.jupiter.android.components.TopBarPerfil
 fun CourseScreen2() {
   MyApplicationTheme() {
     Scaffold(
-      topBar = { TopBarPerfil(title = "JUPITER") },
+      topBar = { TopBarCourse(titulo = "JUPITER") },
       containerColor = Color(0xFF20B2AA)
     ) {
 
-      LazyColumn(modifier = Modifier.padding(it).padding(horizontal = 23.dp, vertical = 23.dp)
+      LazyColumn(modifier = Modifier
+        .padding(it)
+        .padding(horizontal = 23.dp, vertical = 23.dp)
       ) {
 
         item {
@@ -49,10 +51,11 @@ fun CourseScreen2() {
           Row(
             verticalAlignment = Alignment.CenterVertically
           ) {
-                CardCourse(curso = "Curso de finança básico") {}
+            Card() {
+              CardCourse(curso = "Curso de finanças básico") {}
+            }
           }
         }
-
       }
     }
   }

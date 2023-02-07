@@ -78,7 +78,7 @@ fun OrderScreen(
 
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
-                    text = "Válidade acesso a plataforma: 12 meses",
+                    text = "Válidade de acesso a plataforma: 12 meses",
                     fontWeight = FontWeight.Bold,
                     fontSize = 18.sp
                 )

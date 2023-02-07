@@ -1,8 +1,7 @@
 package br.com.jupiter.android.components
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -17,7 +16,14 @@ import br.com.jupiter.model.Conteudo
 
 @Composable
 fun ContentItem(conteudo: Conteudo) {
-    Column {
+    Column(
+      verticalArrangement = Arrangement.Center,
+      modifier = Modifier
+        .background(Color.White)
+        .height(250.dp)
+        .fillMaxWidth()
+        .padding()
+    ) {
         Row(modifier = Modifier.padding(vertical = 10.dp, horizontal = 16.dp)) {
             Text(
                 text = "${conteudo.ordemConteudo} - ",
@@ -37,7 +43,7 @@ fun ContentItem(conteudo: Conteudo) {
                 text = conteudo.descricao,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.White
+                color = Color.Black
             )
         }
         Row(modifier = Modifier.padding(horizontal = 50.dp)) {
@@ -46,7 +52,7 @@ fun ContentItem(conteudo: Conteudo) {
                     text = conteudo.url,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = Color.Black
                 )
             }
         }

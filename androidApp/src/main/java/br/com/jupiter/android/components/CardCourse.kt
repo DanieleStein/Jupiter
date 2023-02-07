@@ -33,7 +33,7 @@ import kotlin.math.absoluteValue
 fun CardCourse(curso: String, onCardNavigation: () -> Unit) {
     Column(
         modifier = Modifier
-            .background(Color.Black)
+            .background(Color.White)
             .height(116.dp)
             .padding(horizontal = 23.dp, vertical = 23.dp)
             .fillMaxWidth()
@@ -50,14 +50,19 @@ fun CardCourse(curso: String, onCardNavigation: () -> Unit) {
                         painter = painterResource(id = R.drawable.porqueinho),
                         contentDescription = "Dinheiro"
                     )
+
                 }
-                Text(
-                    curso,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    textAlign = TextAlign.Center
-                )
+                Spacer(modifier = Modifier.width(25.dp))
+                Column(){
+                    Text(
+                        curso,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black,
+                        textAlign = TextAlign.Center
+                    )
+                }
+
             }
         }
     }
@@ -67,7 +72,7 @@ fun CardCourse(curso: String, onCardNavigation: () -> Unit) {
 fun CardCourse2(curso: String, onCardNavigation: () -> Unit) {
     Column(
         modifier = Modifier
-            .background(Color.Black)
+            .background(Color.White)
             .height(90.dp)
             .width(180.dp)
     ) {
@@ -85,9 +90,9 @@ fun CardCourse2(curso: String, onCardNavigation: () -> Unit) {
                 }
                 Text(
                     curso,
-                    fontSize = 18.sp,
+                    fontSize = 15.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White,
+                    color = Color.Black,
                     textAlign = TextAlign.Center
                 )
             }

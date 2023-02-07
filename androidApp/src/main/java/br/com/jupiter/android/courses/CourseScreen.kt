@@ -1,5 +1,6 @@
 package br.com.jupiter.android.courses
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -30,7 +31,8 @@ fun CourseScreen() {
     MyApplicationTheme() {
         Scaffold(
             topBar = { TopBarPerfil(title = "JUPITER") },
-            containerColor = Color(0xFF20B2AA),
+            containerColor = Color.Black,
+
         ) {
 
             LazyColumn(modifier = Modifier.padding(it)) {

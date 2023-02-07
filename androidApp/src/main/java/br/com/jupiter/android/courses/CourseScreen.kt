@@ -34,12 +34,22 @@ fun CourseScreen() {
             containerColor = Color(0xFF20B2AA),
         ) {
 
-            Spacer(modifier = Modifier.height(50.dp))
-            LazyColumn(modifier = Modifier.padding(it)) {
 
-                val categorias: Array<Categorias> = Categorias.values()
+      LazyColumn(modifier = Modifier.padding(it)) {
 
-                for (categoria in categorias) {
+       item {
+         Row(
+           modifier = Modifier.padding(20.dp),//Espaço entre as bordas do Texto
+           verticalAlignment = Alignment.CenterVertically //alinhados na vertical
+         ) {
+           Text(text = "FINANÇAS", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color.White)
+           Spacer(modifier = Modifier.weight(1f)) //espaço entre a escrita e a seta
+           IconButton(onClick = { /*TODO*/ }) {
+             Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.White)
+           }
+         }
+       }
+
 
                     item {
                         Row(

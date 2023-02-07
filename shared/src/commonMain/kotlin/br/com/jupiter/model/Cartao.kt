@@ -1,5 +1,6 @@
 package br.com.jupiter.model
 
+
 data class Cartao(
     val id: Long,
     val nomeCartao: String,

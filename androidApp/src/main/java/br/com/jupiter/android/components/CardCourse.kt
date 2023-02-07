@@ -19,7 +19,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
 import androidx.navigation.compose.rememberNavController
+import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.R
+import br.com.jupiter.model.Categorias
+import br.com.jupiter.model.Conteudo
+import br.com.jupiter.model.Curso
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
@@ -50,7 +54,6 @@ fun CardCourse(curso: String, onCardNavigation: () -> Unit) {
         Text(curso, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White,textAlign = TextAlign.Center)
       }
     }
-  }
 }
 
 @Composable
@@ -83,8 +86,8 @@ fun CardCourse2(curso: String, onCardNavigation: () -> Unit) {
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun CardCourseGroup() {
-  val navController = rememberNavController()
+fun CardCourseGroup(categoria: String) {
+
 
   HorizontalPager(
     count = 4,
@@ -108,19 +111,18 @@ fun CardCourseGroup() {
     ) {
       CardCourse(curso = "CURSO DE FUNDOS DE INVESTIMENTO") {}
     }
-  }
 }
 
 @Preview
 @Composable
 fun CardCoursePreview() {
-  CardCourse("CURSO DE FUNDOS DE INVESTIMENTO"){}
+    CardCourse("Curso sobre Finanças") {}
 }
 
 @Preview
 @Composable
 fun CardCourseGroupPreview() {
-  CardCourseGroup()
+    CardCourseGroup(Categorias.FII.name)
 }
 
 @Preview

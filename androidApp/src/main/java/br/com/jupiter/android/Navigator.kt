@@ -6,12 +6,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.com.jupiter.Objects.Mock
+import br.com.jupiter.android.components.CardCourse
 import br.com.jupiter.android.content.ContentScreen
 import br.com.jupiter.android.courses.CourseScreen
 import br.com.jupiter.android.login.LoginScreen
 import br.com.jupiter.android.orders.OrderScreen
 import br.com.jupiter.android.registerPayment.RegisterPaymentScreen
 import br.com.jupiter.android.registerUser1.RegisterUserScreen
+import br.com.jupiter.model.Curso
 import br.com.jupiter.model.Usuario
 
 
@@ -26,8 +29,6 @@ fun Navigator(
     initial: Route = Route.LOGIN
 ) {
 
-    lateinit var usuario: Usuario
-
 
     NavHost(
         navController = navHostController,
@@ -39,17 +40,23 @@ fun Navigator(
 
         composable(Route.LOGIN.name) {
             LoginScreen(
-                onHomeNavigate = {navHostController.navigate(Route.COURSES.name)},
-                onCreateNavigate = {navHostController.navigate(Route.CREATE.name)}
+                onHomeNavigate = { navHostController.navigate(Route.COURSES.name) },
+                onCreateNavigate = { navHostController.navigate(Route.CREATE.name) }
             )
 
         }
 
         composable(Route.COURSES.name) {
             CourseScreen()
-
-            //navHostController.navigate(Route.CONTENT.name)
         }
+
+ /*       composable(Route.CARD.name) {
+            CardCourse(onNavigateDetails = { conteudo ->
+                println(conteudo)
+                navHostController.navigate(Route.LOGIN.name)
+            }, curso = ""
+            )
+        }*/
 
         composable(Route.CREATE.name) {
             RegisterUserScreen(

@@ -29,13 +29,13 @@ fun ContentScreen(function: () -> Unit) {
             containerColor = Color(0xFF20B2AA),
         ) {
             LazyColumn(modifier = Modifier.padding(it)) {
-                val curso = Mock.curso
+                val curso = Mock.curso1
                 val listaDeConteudo: List<Conteudo>? = curso.conteudo
 
                 item {
                     Row(modifier = Modifier.padding(vertical = 10.dp, horizontal = 16.dp)) {
                         Card() {
-                            CardCourse(curso = curso.curso, {})
+                            CardCourse(curso = curso.titulo) {}
                         }
                     }
                 }

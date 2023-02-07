@@ -18,14 +18,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.CardCourse
 import br.com.jupiter.android.components.TopBarCourse
 import br.com.jupiter.android.components.TopBarPerfil
+import br.com.jupiter.model.Categorias
+import br.com.jupiter.model.Curso
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CourseScreen2() {
+fun CourseScreen2(categoria: String) {
   MyApplicationTheme() {
     Scaffold(
       topBar = { TopBarCourse(titulo = "JUPITER") },
@@ -37,22 +40,27 @@ fun CourseScreen2() {
         .padding(horizontal = 23.dp, vertical = 23.dp)
       ) {
 
+
+        val cursos: List<Curso> = Mock.listaDeCursos
+        val cursosFiltrados: List<Curso> =
+          cursos.filter { c -> c.curso.toString() == categoria }
+
         item {
           Row(
             modifier = Modifier.padding(20.dp),//Espaço entre as bordas do Texto
             verticalAlignment = Alignment.CenterVertically //alinhados na vertical
           ) {
-            Text(text = "FINANÇAS", fontSize = 25.sp, fontWeight = FontWeight.Bold, color = Color.White)
+            Text(text = cursosFiltrados[0].curso.name, fontSize = 25.sp, fontWeight = FontWeight.Bold, color = Color.White)
           }
         }
 
-        items(7) {
+        items(cursosFiltrados.size) { page ->
           Spacer(modifier = Modifier.height(20.dp))
           Row(
             verticalAlignment = Alignment.CenterVertically
           ) {
             Card() {
-              CardCourse(curso = "Curso de finanças básico") {}
+              CardCourse(curso = cursosFiltrados[page].titulo) {}
             }
           }
         }
@@ -64,6 +72,6 @@ fun CourseScreen2() {
 @Preview
 @Composable
 fun CourseScreen2Preview() {
-  CourseScreen2()
+  CourseScreen2(Categorias.FINANÇAS.name)
 }
 

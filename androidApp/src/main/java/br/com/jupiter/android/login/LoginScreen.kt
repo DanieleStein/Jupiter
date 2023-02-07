@@ -65,10 +65,10 @@ fun LoginScreen(
           contentDescription = "Profile",
           modifier = Modifier)
 
-        Spacer(modifier = Modifier.height(10.dp))
+        /*Spacer(modifier = Modifier.height(10.dp))
         Text(text = "EMAIL", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White, modifier = Modifier
           .padding()
-          .fillMaxWidth())
+          .fillMaxWidth())*/
 
         Spacer(modifier = Modifier.height(5.dp))
         OutlinedTextField(
@@ -76,21 +76,23 @@ fun LoginScreen(
             .fillMaxWidth()
             .background(Color(0xFFD9D9D9)),
           value = email.value,
+          label = { Text(text = "Email") },
           onValueChange = {email.value = it},
           keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        /*Spacer(modifier = Modifier.height(20.dp))
         Text(text = "SENHA", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White, modifier = Modifier
           .padding()
-          .fillMaxWidth())
+          .fillMaxWidth())*/
 
-        Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(20.dp))
         OutlinedTextField(
           modifier = Modifier
             .fillMaxWidth()
             .background(Color(0xFFD9D9D9)),
           value = senha.value,
+          label = { Text(text = "Senha") },
           onValueChange = {senha.value = it},
           visualTransformation = if(senhavisivel.value.not()) {
             VisualTransformation.None

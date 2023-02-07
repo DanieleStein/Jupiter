@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.jupiter.android.MyApplicationTheme
+import br.com.jupiter.android.components.CardCourse
 import br.com.jupiter.android.components.CardCourse2
 import br.com.jupiter.android.components.TopBarPerfil
 
@@ -31,7 +32,7 @@ fun CourseScreen2() {
       containerColor = Color(0xFF20B2AA)
     ) {
 
-      LazyColumn(modifier = Modifier.padding(it)
+      LazyColumn(modifier = Modifier.padding(it).padding(horizontal = 23.dp, vertical = 23.dp)
       ) {
 
         item {
@@ -44,20 +45,14 @@ fun CourseScreen2() {
         }
 
         items(7) {
-          Spacer(modifier = Modifier.height(15.dp))
+          Spacer(modifier = Modifier.height(20.dp))
           Row(
             verticalAlignment = Alignment.CenterVertically
           ) {
-            Column(modifier = Modifier.padding(10.dp)) {
-              Card() {
-                CardCourse2(curso = "Curso de finança básico") {}
-              }
-            }
-              Card() {
-                CardCourse2(curso = "Curso de finança básico2") {}
-              }
+                CardCourse(curso = "Curso de finança básico") {}
           }
         }
+
       }
     }
   }

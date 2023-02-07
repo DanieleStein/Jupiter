@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.CardCourseGroup
+import br.com.jupiter.android.components.TopBarCourse
 import br.com.jupiter.android.components.TopBarPerfil
 import br.com.jupiter.model.Categorias
 
@@ -47,7 +48,7 @@ fun CourseScreen() {
                         ) {
                             Text(
                                 text = categoria.name,
-                                fontSize = 16.sp,
+                                fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Color.White
                             )

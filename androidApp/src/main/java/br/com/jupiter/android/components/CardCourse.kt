@@ -48,36 +48,6 @@ fun CardCourse(curso: String, onCardNavigation: () -> Unit) {
                 Column() {
                     Image(
                         painter = painterResource(id = R.drawable.porqueinho),
-                        contentDescription = "Dinheiro"
-                    )
-                }
-                Text(
-                    curso,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun CardCourse2(curso: String, onCardNavigation: () -> Unit) {
-    Column(
-        modifier = Modifier
-            .background(Color.Black)
-            .height(90.dp)
-            .width(180.dp)
-    ) {
-        TextButton(onClick = { /*TODO*/ }) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column() {
-                    Image(
-                        painter = painterResource(id = R.drawable.porqueinho),
                         contentDescription = "Dinheiro",
                         contentScale = ContentScale.Fit,
                         modifier = Modifier.height(60.dp)
@@ -131,7 +101,7 @@ fun CardCourseGroup(categoria: String) {
 @Preview
 @Composable
 fun CardCoursePreview() {
-    CardCourse("Curso sobre Finanças") {}
+    CardCourse("Curso sobre Finanças avançadas") {}
 }
 
 @Preview
@@ -140,10 +110,3 @@ fun CardCourseGroupPreview() {
     CardCourseGroup(Categorias.FII.name)
 }
 
-@Preview
-@Composable
-fun CardCourse2Preview() {
-    CardCourse2(curso = "Curso de fundos de Investimento") {
-
-    }
-}

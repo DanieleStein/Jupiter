@@ -40,6 +40,34 @@ fun TopBarPerfil(title: String) {
     },
 
     actions = {
+
+      IconButton(onClick = {}) {
+        Image(
+          painter = painterResource(R.drawable.ic_profile2),
+          contentDescription = "Profile",
+          contentScale = ContentScale.Fit,
+          modifier = Modifier
+            .height(40.dp)
+            .clip(CircleShape)
+        )
+      }
+
+    },
+    backgroundColor = Color(0xFF0051EF)
+  )
+}
+
+@Composable
+fun TopBarCourse(titulo: String) {
+  TopAppBar(
+    title = { Text(text = titulo, fontWeight = FontWeight.Bold, fontSize = 36.sp, color = Color.White) },
+    navigationIcon = {
+      IconButton(onClick = {}) {
+        Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.White)
+      }
+    },
+
+    actions = {
       IconButton(onClick = {}) {
         Image(
           painter = painterResource(R.drawable.baseline_search_24),
@@ -77,4 +105,10 @@ fun TopBar1Preview() {
 @Composable
 fun TopBarPerfilPreview() {
   TopBarPerfil(title = "JUPITER")
+}
+
+@Preview
+@Composable
+fun TopBarCoursePreview() {
+  TopBarCourse(titulo = "JUPITER")
 }

@@ -55,7 +55,7 @@ fun LoginScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
           .padding(it)
-          .padding(horizontal = 30.dp, vertical = 30.dp)
+          .padding(horizontal = 20.dp, vertical = 20.dp)
           .verticalScroll(rememberScrollState())
       ) {
 
@@ -63,7 +63,7 @@ fun LoginScreen(
         Image(
           painter = painterResource(R.drawable.jupiterlogin3),
           contentDescription = "Profile",
-          modifier = Modifier)
+          modifier = Modifier.fillMaxWidth())
 
         /*Spacer(modifier = Modifier.height(10.dp))
         Text(text = "EMAIL", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White, modifier = Modifier

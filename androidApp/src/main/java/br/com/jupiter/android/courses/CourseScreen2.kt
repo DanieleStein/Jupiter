@@ -2,14 +2,10 @@ package br.com.jupiter.android.courses
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,20 +14,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.CardCourse
 import br.com.jupiter.android.components.TopBarCourse
-import br.com.jupiter.android.components.TopBarPerfil
 import br.com.jupiter.model.Categorias
 import br.com.jupiter.model.Curso
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CourseScreen2(categoria: String) {
+fun CourseScreen2(categoria: String, navHostController: NavHostController?) {
   MyApplicationTheme() {
     Scaffold(
-      topBar = { TopBarCourse(titulo = "JUPITER") },
+      topBar = { TopBarCourse(titulo = "JUPITER", navHostController = navHostController) },
       containerColor = Color.Black
     ) {
 
@@ -60,7 +56,7 @@ fun CourseScreen2(categoria: String) {
             verticalAlignment = Alignment.CenterVertically
           ) {
             Card() {
-              CardCourse(curso = cursosFiltrados[page].titulo) {}
+              CardCourse(curso = cursosFiltrados[page], onCardNavigation = {}, navHostController = navHostController)
             }
           }
         }
@@ -72,6 +68,6 @@ fun CourseScreen2(categoria: String) {
 @Preview
 @Composable
 fun CourseScreen2Preview() {
-  CourseScreen2(Categorias.FINANÇAS.name)
+  CourseScreen2(Categorias.FINANÇAS.name, navHostController = null)
 }
 

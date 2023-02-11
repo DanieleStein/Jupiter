@@ -19,18 +19,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.CardCourseGroup
-import br.com.jupiter.android.components.TopBarCourse
 import br.com.jupiter.android.components.TopBarPerfil
+import br.com.jupiter.android.components.TopBarPerfilOnly
 import br.com.jupiter.model.Categorias
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CourseScreen() {
+fun CourseScreen(onCategoryDetail: (String) -> Unit, navHostController: NavHostController?) {
     MyApplicationTheme() {
         Scaffold(
-            topBar = { TopBarPerfil(title = "JUPITER") },
+            topBar = { TopBarPerfilOnly(title = "JUPITER") },
             containerColor = Color.Black,
         ) {
 
@@ -53,14 +54,14 @@ fun CourseScreen() {
                                 color = Color.White
                             )
                             Spacer(modifier = Modifier.weight(1f)) //espaço entre a escrita e a seta
-                            IconButton(onClick = { /*TODO*/ }) {
+                            IconButton(onClick = { onCategoryDetail.invoke(categoria.name) }) {
                                 Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.White)
                             }
                         }
                     }
 
                     item {
-                        CardCourseGroup(categoria.name)
+                        CardCourseGroup(categoria.name, navHostController = navHostController, onCard = {})
                     }
 
                 }
@@ -73,5 +74,5 @@ fun CourseScreen() {
 @Preview
 @Composable
 fun CourseScreenPreview() {
-    CourseScreen()
+    CourseScreen(onCategoryDetail = {}, navHostController = null)
 }

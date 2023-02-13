@@ -10,9 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,12 +23,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
+import androidx.lifecycle.viewmodel.compose.viewModel
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.R
 import br.com.jupiter.android.components.AlertDialogComponent
 import br.com.jupiter.android.components.BottomBar
 import br.com.jupiter.model.Login
+import br.com.jupiter.util.DataResult
 
 
 @Composable
@@ -40,15 +39,33 @@ fun LoginScreen(
   val senha = remember { mutableStateOf(TextFieldValue()) }
   val senhavisivel = remember { mutableStateOf(false) }
   val showDialog = remember { mutableStateOf(false) }
+ /* val modelLogin = viewModel<LoginViewModel>()
+  val token by modelLogin.token.collectAsState()*/
+
+
 
   MyApplicationTheme() {
     Scaffold(bottomBar = { BottomBar(title = "ENTRAR", onClick = {
-      val login = Login(email = email.value.text, senha = senha.value.text)
-      if (login.validacao()){
+
+    val login = Login(email = email.value.text, senha = senha.value.text)
+
+     /* when (token) {
+        //is Result.Loading -> LoadingIndicatorScreen()
+        is DataResult.Error -> showDialog.value = true
+        is DataResult.Success -> onHomeNavigate.invoke()
+        else -> {
+          println("Erro")}
+      }*/
+
+    /*
+
+        println(modelLogin.loginFunction(login))*/
+
+      /*if (loginFun){
         onHomeNavigate.invoke()
       } else {
         showDialog.value = true
-      }
+      }*/
     })  }, backgroundColor = Color(0xFF0051EF)) {
       Column(
         verticalArrangement = Arrangement.Center,
@@ -134,6 +151,8 @@ fun LoginScreen(
     }
   }
 }
+
+
 
 @Preview
 @Composable

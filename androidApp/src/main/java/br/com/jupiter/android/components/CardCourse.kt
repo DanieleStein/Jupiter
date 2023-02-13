@@ -6,6 +6,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,9 +20,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.R
+import br.com.jupiter.android.courses.CourseViewModel
 import br.com.jupiter.model.Categorias
 import br.com.jupiter.model.Curso
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -29,7 +33,11 @@ import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import kotlin.math.absoluteValue
 
 @Composable
-fun CardCourse(curso: Curso, onCardNavigation: (Long) -> Unit, navHostController: NavHostController?) {
+fun CardCourse(
+    curso: Curso,
+    onCardNavigation: (Long) -> Unit,
+    navHostController: NavHostController?
+) {
     Column(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
@@ -72,9 +80,16 @@ fun CardCourse(curso: Curso, onCardNavigation: (Long) -> Unit, navHostController
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun CardCourseGroup(categoria: String, onCard: (String) -> Unit, navHostController: NavHostController? ) {
+fun CardCourseGroup(
+    cursos: List<Curso>,
+    categoria: String, onCard: (String) -> Unit,
+    navHostController: NavHostController?
+) {
 
-    val cursos: List<Curso> = Mock.listaDeCursos
+    //val viewModel = viewModel<CourseViewModel>()
+    //val cursos by viewModel.cursos.collectAsState()
+    //val cursos: List<Curso> = Mock.listaDeCursos
+
     val cursosFiltrados: List<Curso> = cursos.filter { it.curso.toString() == categoria }
 
     HorizontalPager(
@@ -99,7 +114,10 @@ fun CardCourseGroup(categoria: String, onCard: (String) -> Unit, navHostControll
 
             }
         ) {
-            CardCourse(curso = cursosFiltrados[page], navHostController = navHostController , onCardNavigation = {})
+            CardCourse(
+                curso = cursosFiltrados[page],
+                navHostController = navHostController,
+                onCardNavigation = {})
         }
     }
 }
@@ -113,6 +131,10 @@ fun CardCoursePreview() {
 @Preview
 @Composable
 fun CardCourseGroupPreview() {
-    CardCourseGroup(Categorias.FII.name, navHostController = null, onCard = {})
+    CardCourseGroup(
+        cursos = Mock.listaDeCursos,
+        categoria = Categorias.FINANCAS.name,
+        navHostController = null,
+        onCard = {})
 }
 

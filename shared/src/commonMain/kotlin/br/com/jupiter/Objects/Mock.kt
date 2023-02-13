@@ -59,7 +59,7 @@ object Mock {
 
     val curso1: Curso = Curso(
         id = 1,
-        curso = Categorias.FINANÇAS,
+        curso = Categorias.FINANCAS,
         titulo = "Curso sobre Finanças",
         descricao = "Esse curso ensina sobre finanças",
         conteudo = listaDeConteudo,
@@ -68,7 +68,7 @@ object Mock {
 
     val curso2: Curso = Curso(
         id = 2,
-        curso = Categorias.FINANÇAS,
+        curso = Categorias.FINANCAS,
         titulo = "Curso sobre Finanças Empresarial",
         descricao = "Esse curso ensina sobre finanças Empresarial",
         conteudo = listaDeConteudo,

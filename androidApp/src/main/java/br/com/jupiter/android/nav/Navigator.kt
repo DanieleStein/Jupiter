@@ -1,25 +1,26 @@
 package br.com.jupiter.android.nav
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navigation
 import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.components.CardCourse
-import br.com.jupiter.android.components.CardCourseGroup
 import br.com.jupiter.android.content.ContentScreen
 import br.com.jupiter.android.courses.CourseScreen
 import br.com.jupiter.android.courses.CourseScreen2
+import br.com.jupiter.android.courses.CourseViewModel
 import br.com.jupiter.android.login.LoginScreen
 import br.com.jupiter.android.orders.OrderScreen
 import br.com.jupiter.android.registerPayment.RegisterPaymentScreen
 import br.com.jupiter.android.registerUser1.RegisterUserScreen
-import br.com.jupiter.model.Categorias
 
 
 enum class Route {
@@ -32,6 +33,9 @@ fun Navigator(
     navHostController: NavHostController = rememberNavController(),
     initial: Route = Route.COURSES
 ) {
+
+    val viewModel = viewModel<CourseViewModel>()
+    val cursos by viewModel.cursos.collectAsState()
 
 
     NavHost(
@@ -50,13 +54,18 @@ fun Navigator(
         composable(Route.COURSES.name) {
             CourseScreen(
                 onCategoryDetail = { navHostController.navigate("${Route.COURSES_DETAIL}/$it") },
-                navHostController = navHostController
+                navHostController = navHostController,
+                cursos = cursos
             )
         }
 
         composable("${Route.COURSES_DETAIL}/{categoria}") {
             val categoria = it.arguments?.getString("categoria")
-            CourseScreen2(categoria ?: "", navHostController = navHostController)
+            CourseScreen2(
+                categoria = categoria ?: "",
+                navHostController = navHostController,
+                cursos = cursos
+            )
         }
 
 
@@ -76,10 +85,6 @@ fun Navigator(
             println(conteudo)
             ContentScreen(id = 1, onBack = { })
         }
-
-        /*composable(Route.CONTENT.name) {
-            ContentScreen(id = 1, onBack = { })
-        }*/
 
 
         composable(Route.CREATE.name) {
@@ -106,7 +111,6 @@ fun Navigator(
             )
         }
 
-        cardsToGroup(navHostController)
 
     }
 
@@ -114,22 +118,4 @@ fun Navigator(
 }
 
 
-fun NavGraphBuilder.cardsToGroup(navController: NavController) {
-    navigation(Route.CONTENT.name, route = Route.CARD.name) {
-
-        composable(route = Route.CONTENT.name) {
-            ContentScreen(onBack = {
-                println("")
-            }, id = 0)
-        }
-
-        /*composable("${Route.COURSES.name}/${Route.CARD_GROUP.name}") {
-    CardCourseGroup(categoria = Categorias.FII.name, onCard = {
-        println(it)
-    }, navHostController = navHostController)
-}*/
-
-
-    }
-}
 

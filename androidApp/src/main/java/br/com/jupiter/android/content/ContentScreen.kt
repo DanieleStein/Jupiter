@@ -16,43 +16,52 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.MyApplicationTheme
-import br.com.jupiter.android.Route
-import br.com.jupiter.android.components.CardCourse
 import br.com.jupiter.android.components.ContentItem
 import br.com.jupiter.android.components.TopBarPerfil
 import br.com.jupiter.model.Conteudo
+import br.com.jupiter.model.Curso
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContentScreen(function: () -> Unit) {
+fun ContentScreen(listaDeCurso: List<Curso>, navHostController: NavHostController?, id: Long?) {
     MyApplicationTheme() {
         Scaffold(
-            topBar = { TopBarPerfil(title = "JUPITER") },
+            topBar = { TopBarPerfil(title = "JUPITER", navHostController = navHostController) },
             containerColor = Color.Black,
         ) {
-            LazyColumn(modifier = Modifier
-              .padding(it)
-              .padding(horizontal = 23.dp, vertical = 23.dp)) {
+            LazyColumn(
+                modifier = Modifier
+                    .padding(it)
+                    .padding(horizontal = 23.dp, vertical = 23.dp)
+            ) {
 
-                val curso = Mock.curso1
-                val listaDeConteudo: List<Conteudo>? = curso.conteudo
+                val curso: Curso? = listaDeCurso.filter { it.id == id }.firstOrNull()
+
+                val listaDeConteudo: List<Conteudo>? =
+                    listaDeCurso.filter { it.id == id }.firstOrNull()?.conteudo
 
                 item {
-                  Spacer(modifier = Modifier.height(15.dp))
+                    Spacer(modifier = Modifier.height(15.dp))
                     Row(modifier = Modifier.padding(vertical = 10.dp, horizontal = 16.dp)) {
-                      Text(text = curso.titulo, fontSize = 25.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                        Text(
+                            text = curso?.titulo ?: "",
+                            fontSize = 25.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
                     }
                 }
 
                 if (listaDeConteudo != null) {
                     items(listaDeConteudo.size) {
-                      Spacer(modifier = Modifier.height(20.dp))
-                      Card() {
-                        ContentItem(conteudo = listaDeConteudo[it])
-                      }
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Card() {
+                            ContentItem(conteudo = listaDeConteudo[it])
+                        }
                     }
                 }
 
@@ -65,7 +74,7 @@ fun ContentScreen(function: () -> Unit) {
 @Preview
 @Composable
 fun ContentScreenPreview() {
-    ContentScreen() {}
+    ContentScreen(id = 1, navHostController = null, listaDeCurso = Mock.listaDeCursos)
 }
 
 

@@ -1,6 +1,8 @@
 package br.com.jupiter.model
 
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Cartao(
     val id: Long,
     val nomeCartao: String,

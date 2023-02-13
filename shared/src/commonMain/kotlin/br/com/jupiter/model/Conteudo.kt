@@ -8,6 +8,8 @@ data class Conteudo(
     val titulo: String,
     val descricao: String,
     val url: String,
-    val ordemConteudo: Long,
-    val curso: Curso?
+    val ordemConteudo: Long
 )
+
+@Serializable
+data class ConteudoResponse(val conteudo: List<Conteudo>)

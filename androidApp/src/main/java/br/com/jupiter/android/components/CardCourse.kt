@@ -25,6 +25,7 @@ import androidx.navigation.NavHostController
 import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.R
 import br.com.jupiter.android.courses.CourseViewModel
+import br.com.jupiter.android.nav.Route
 import br.com.jupiter.model.Categorias
 import br.com.jupiter.model.Curso
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -48,8 +49,9 @@ fun CardCourse(
             .clickable {}
     ) {
         TextButton(onClick = {
-            println(navHostController)
-            onCardNavigation.invoke(curso.id)
+            //onCardNavigation.invoke(curso.id)
+
+            navHostController?.navigate("${Route.CONTENT}/${curso.id}")
         }) {
             Row(
                 verticalAlignment = Alignment.CenterVertically
@@ -86,10 +88,6 @@ fun CardCourseGroup(
     navHostController: NavHostController?
 ) {
 
-    //val viewModel = viewModel<CourseViewModel>()
-    //val cursos by viewModel.cursos.collectAsState()
-    //val cursos: List<Curso> = Mock.listaDeCursos
-
     val cursosFiltrados: List<Curso> = cursos.filter { it.curso.toString() == categoria }
 
     HorizontalPager(
@@ -97,7 +95,9 @@ fun CardCourseGroup(
         contentPadding = PaddingValues(horizontal = 32.dp),
         modifier = Modifier
             .height(125.dp)
-            .clickable { onCard.invoke("teste") }
+            .clickable {
+
+            }
     ) { page ->
         val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
         Card(
@@ -121,6 +121,7 @@ fun CardCourseGroup(
         }
     }
 }
+
 
 @Preview
 @Composable

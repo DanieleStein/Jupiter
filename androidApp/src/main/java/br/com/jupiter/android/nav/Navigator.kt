@@ -5,8 +5,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.components.CardCourse
 import br.com.jupiter.android.content.ContentScreen
+import br.com.jupiter.android.content.ContentViewModel
 import br.com.jupiter.android.courses.CourseScreen
 import br.com.jupiter.android.courses.CourseScreen2
 import br.com.jupiter.android.courses.CourseViewModel
@@ -31,12 +30,13 @@ enum class Route {
 fun Navigator(
     modifier: Modifier = Modifier,
     navHostController: NavHostController = rememberNavController(),
-    initial: Route = Route.COURSES
+    initial: Route = Route.LOGIN
 ) {
 
-    val viewModel = viewModel<CourseViewModel>()
-    val cursos by viewModel.cursos.collectAsState()
-
+    val courseViewModel = viewModel<CourseViewModel>()
+    val contentViewModel = viewModel<ContentViewModel>()
+    val cursos by courseViewModel.cursos.collectAsState()
+    val contents by contentViewModel.contents.collectAsState()
 
     NavHost(
         navController = navHostController,
@@ -69,7 +69,7 @@ fun Navigator(
         }
 
 
-        composable(Route.CARD.name) {
+/*        composable(Route.CARD.name) {
             CardCourse(
                 curso = Mock.curso1,
                 navHostController = navHostController,
@@ -77,14 +77,30 @@ fun Navigator(
                     println("Entrei com id: ${id}")
                     navHostController.navigate("${Route.CONTENT}/$id")
                 })
-        }
+        }*/
 
 
         composable("${Route.CONTENT}/{conteudo}") {
-            val conteudo = it.arguments?.getString("conteudo")
-            println(conteudo)
-            ContentScreen(id = 1, onBack = { })
+            val conteudo = it.arguments?.getString("conteudo")?.toLong()
+            println("Conteudo: ${conteudo}")
+
+            if (conteudo != null) {
+                contentViewModel.getContent(conteudo)
+                println(contents)
+
+                //ContentScreen(listaDeCurso = , navHostController = , id = )
+            }
+            ContentScreen(id = conteudo, navHostController = navHostController, listaDeCurso = cursos)
         }
+
+/*        composable(Route.CONTENT.name) {
+            ContentScreen(
+                listaDeCurso =  cursos,
+                navHostController = navHostController,
+                id = 8
+            )
+        }*/
+
 
 
         composable(Route.CREATE.name) {

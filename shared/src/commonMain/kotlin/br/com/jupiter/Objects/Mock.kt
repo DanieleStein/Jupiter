@@ -12,8 +12,7 @@ object Mock {
         titulo = "Onde guardar seu dinheiro?",
         descricao = "Confira aqui as melhores formas de guardar seu dinheiro de forma que te traga grandes rendimentos a longo e curto prazo!",
         url = "https://youtube.com.br",
-        ordemConteudo = 1,
-        curso = null
+        ordemConteudo = 1
     )
 
     val conteudo2: Conteudo = Conteudo(
@@ -21,8 +20,7 @@ object Mock {
         titulo = "Onde guardar seu dinheiro 2?",
         descricao = "Confira aqui as melhores formas de guardar seu dinheiro de forma que te traga grandes rendimentos a longo e curto prazo! 2",
         url = "https://youtube.com.br",
-        ordemConteudo = 2,
-        curso = null
+        ordemConteudo = 2
     )
 
     val conteudo3: Conteudo = Conteudo(
@@ -30,8 +28,7 @@ object Mock {
         titulo = "Onde guardar seu dinheiro 3?",
         descricao = "Confira aqui as melhores formas de guardar seu dinheiro de forma que te traga grandes rendimentos a longo e curto prazo! 3",
         url = "https://youtube.com.br",
-        ordemConteudo = 3,
-        curso = null
+        ordemConteudo = 3
     )
 
     val conteudo4: Conteudo = Conteudo(
@@ -39,8 +36,7 @@ object Mock {
         titulo = "Onde guardar seu dinheiro 4?",
         descricao = "Confira aqui as melhores formas de guardar seu dinheiro de forma que te traga grandes rendimentos a longo e curto prazo! 4",
         url = "https://youtube.com.br",
-        ordemConteudo = 4,
-        curso = null
+        ordemConteudo = 4
     )
 
 
@@ -77,7 +73,7 @@ object Mock {
 
     val curso3: Curso = Curso(
         id = 3,
-        curso = Categorias.FII,
+        curso = Categorias.RENDA_VARIAVEL,
         titulo = "Curso sobre Fundo Imobiliário",
         descricao = "Esse curso ensina sobre Fundo Imobiliário",
         conteudo = listaDeConteudo,

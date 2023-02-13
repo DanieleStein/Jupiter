@@ -1,5 +1,7 @@
 package br.com.jupiter.network
 
+import br.com.jupiter.model.Conteudo
+import br.com.jupiter.model.ConteudoResponse
 import br.com.jupiter.model.Curso
 import br.com.jupiter.model.Login
 import io.ktor.client.*
@@ -34,13 +36,17 @@ class API {
 
 
     suspend fun login(login: Login): Token {
-        return httpClient.post("$DEFAULT_URL/usuario/login") {
+        return httpClient.post("${DEFAULT_URL}/usuario/login") {
             setBody(login)
         }.body()
     }
 
     suspend fun getCourses(): List<Curso> {
-        return httpClient.get("$DEFAULT_URL/curso").body()
+        return httpClient.get("${DEFAULT_URL}/curso").body()
+    }
+
+    suspend fun getContent(id: Long): ConteudoResponse {
+        return httpClient.get("${DEFAULT_URL}/curso/id/${id}").body()
     }
 
 

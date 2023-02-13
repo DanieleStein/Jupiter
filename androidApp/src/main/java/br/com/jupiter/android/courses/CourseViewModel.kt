@@ -27,7 +27,6 @@ class CourseViewModel(
             Login(email = "jamtibaes@yahoo.com.brr", senha = "1234")
         ).token
     }.invokeOnCompletion {
-        println(API.token)
         getCursos()
     }
 

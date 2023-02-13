@@ -38,7 +38,7 @@ fun TopBar(title: String) {
 }
 
 @Composable
-fun TopBarPerfil(title: String) {
+fun TopBarPerfil(title: String, navHostController: NavHostController?) {
     TopAppBar(
         title = {
             Text(
@@ -56,7 +56,7 @@ fun TopBarPerfil(title: String) {
 
         actions = {
 
-            IconButton(onClick = {}) {
+            IconButton(onClick = { navHostController?.popBackStack() }) {
                 Image(
                     painter = painterResource(R.drawable.ic_profile2),
                     contentDescription = "Profile",
@@ -162,7 +162,7 @@ fun TopBarPerfilOnlyPreview() {
 @Preview
 @Composable
 fun TopBarPerfilPreview() {
-    TopBarPerfil(title = "JUPITER")
+    TopBarPerfil(title = "JUPITER", navHostController = null)
 }
 
 @Preview

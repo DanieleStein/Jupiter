@@ -7,8 +7,7 @@ import kotlinx.coroutines.flow.flow
 class CursoRepository(private val api: API = API.instance) {
 
     suspend fun getCursos() = flow<List<Curso>> {
-        val chamadaAPI = api.getCourses()
-        emit(chamadaAPI)
+        emit(api.getCourses())
     }
 
     companion object {

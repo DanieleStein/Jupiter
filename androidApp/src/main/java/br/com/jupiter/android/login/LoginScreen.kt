@@ -29,133 +29,134 @@ import br.com.jupiter.android.R
 import br.com.jupiter.android.components.AlertDialogComponent
 import br.com.jupiter.android.components.BottomBar
 import br.com.jupiter.model.Login
-import br.com.jupiter.util.DataResult
 
 
 @Composable
 fun LoginScreen(
-  onHomeNavigate: () -> Unit, onCreateNavigate: () -> Unit) {
-  val email = remember { mutableStateOf(TextFieldValue()) } //Lembrar valor informado na ultima vez
-  val senha = remember { mutableStateOf(TextFieldValue()) }
-  val senhavisivel = remember { mutableStateOf(false) }
-  val showDialog = remember { mutableStateOf(false) }
- /* val modelLogin = viewModel<LoginViewModel>()
-  val token by modelLogin.token.collectAsState()*/
+    onHomeNavigate: () -> Unit, onCreateNavigate: () -> Unit
+) {
+    val email = remember { mutableStateOf(TextFieldValue()) }
+    val senha = remember { mutableStateOf(TextFieldValue()) }
+    val senhavisivel = remember { mutableStateOf(false) }
+    val showDialog = remember { mutableStateOf(false) }
 
+    val modelLogin = viewModel<LoginViewModel>()
+    val token by modelLogin.token.collectAsState()
 
+    MyApplicationTheme() {
+        Scaffold(bottomBar = {
+            BottomBar(title = "ENTRAR", onClick = {
+                val login = Login(email = email.value.text, senha = senha.value.text)
+                modelLogin.getToken(login)
 
-  MyApplicationTheme() {
-    Scaffold(bottomBar = { BottomBar(title = "ENTRAR", onClick = {
+                if (token.isNullOrEmpty()) {
+                    showDialog.value = true
+                } else {
+                    onHomeNavigate.invoke()
+                }
 
-    val login = Login(email = email.value.text, senha = senha.value.text)
+            })
+        }, backgroundColor = Color(0xFF0051EF)) {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .padding(it)
+                    .padding(horizontal = 20.dp, vertical = 20.dp)
+                    .verticalScroll(rememberScrollState())
+            ) {
 
-     /* when (token) {
-        //is Result.Loading -> LoadingIndicatorScreen()
-        is DataResult.Error -> showDialog.value = true
-        is DataResult.Success -> onHomeNavigate.invoke()
-        else -> {
-          println("Erro")}
-      }*/
+                Spacer(modifier = Modifier.height(100.dp))
+                Image(
+                    painter = painterResource(R.drawable.jupiterlogin3),
+                    contentDescription = "Profile",
+                    modifier = Modifier.fillMaxWidth()
+                )
 
-    /*
+                /*Spacer(modifier = Modifier.height(10.dp))
+                Text(text = "EMAIL", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White, modifier = Modifier
+                  .padding()
+                  .fillMaxWidth())*/
 
-        println(modelLogin.loginFunction(login))*/
+                Spacer(modifier = Modifier.height(5.dp))
+                OutlinedTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color(0xFFD9D9D9)),
+                    value = email.value,
+                    label = { Text(text = "Email") },
+                    onValueChange = { email.value = it },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+                )
 
-      /*if (loginFun){
-        onHomeNavigate.invoke()
-      } else {
-        showDialog.value = true
-      }*/
-    })  }, backgroundColor = Color(0xFF0051EF)) {
-      Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-          .padding(it)
-          .padding(horizontal = 20.dp, vertical = 20.dp)
-          .verticalScroll(rememberScrollState())
-      ) {
+                /*Spacer(modifier = Modifier.height(20.dp))
+                Text(text = "SENHA", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White, modifier = Modifier
+                  .padding()
+                  .fillMaxWidth())*/
 
-        Spacer(modifier = Modifier.height(100.dp))
-        Image(
-          painter = painterResource(R.drawable.jupiterlogin3),
-          contentDescription = "Profile",
-          modifier = Modifier.fillMaxWidth())
+                Spacer(modifier = Modifier.height(20.dp))
+                OutlinedTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color(0xFFD9D9D9)),
+                    value = senha.value,
+                    label = { Text(text = "Senha") },
+                    onValueChange = { senha.value = it },
+                    visualTransformation = if (senhavisivel.value.not()) {
+                        VisualTransformation.None
+                    } else {
+                        PasswordVisualTransformation()
+                    },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    trailingIcon = {
+                        val description = if (senhavisivel.value.not()) "Visivel" else "Invisivel"
+                        val icone =
+                            if (senhavisivel.value.not()) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
+                        IconButton(onClick = { senhavisivel.value = senhavisivel.value.not() }) {
+                            Icon(imageVector = icone, contentDescription = description)
+                        }
+                    }
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    TextButton(onClick = { onCreateNavigate.invoke() }) {
+                        Text(
+                            text = "CADASTRAR CONTA",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+                            color = Color.White
+                        )
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
+                    TextButton(onClick = {
 
-        /*Spacer(modifier = Modifier.height(10.dp))
-        Text(text = "EMAIL", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White, modifier = Modifier
-          .padding()
-          .fillMaxWidth())*/
+                    }) {
+                        Text(
+                            text = "ESQUECI SENHA",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+                            color = Color.White
+                        )
+                    }
+                }
 
-        Spacer(modifier = Modifier.height(5.dp))
-        OutlinedTextField(
-          modifier = Modifier
-            .fillMaxWidth()
-            .background(Color(0xFFD9D9D9)),
-          value = email.value,
-          label = { Text(text = "Email") },
-          onValueChange = {email.value = it},
-          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
-        )
+                AlertDialogComponent(
+                    openDialog = showDialog.value,
+                    title = "Erro",
+                    message = "Login e/ou senha errada!",
+                    onDismissRequest = { showDialog.value = false }
+                )
 
-        /*Spacer(modifier = Modifier.height(20.dp))
-        Text(text = "SENHA", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White, modifier = Modifier
-          .padding()
-          .fillMaxWidth())*/
-
-        Spacer(modifier = Modifier.height(20.dp))
-        OutlinedTextField(
-          modifier = Modifier
-            .fillMaxWidth()
-            .background(Color(0xFFD9D9D9)),
-          value = senha.value,
-          label = { Text(text = "Senha") },
-          onValueChange = {senha.value = it},
-          visualTransformation = if(senhavisivel.value.not()) {
-            VisualTransformation.None
-          } else {
-            PasswordVisualTransformation()
-          },
-          keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-          trailingIcon = {
-            val description = if(senhavisivel.value.not()) "Visivel" else "Invisivel"
-            val icone = if(senhavisivel.value.not()) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
-            IconButton(onClick = { senhavisivel.value = senhavisivel.value.not() }) {
-              Icon(imageVector = icone, contentDescription = description)
             }
-          }
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        Row(
-          verticalAlignment = Alignment.CenterVertically
-        ) {
-          TextButton(onClick = { onCreateNavigate.invoke() }) {
-            Text(text = "CADASTRAR CONTA", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Color.White)
-          }
-          Spacer(modifier = Modifier.weight(1f))
-          TextButton(onClick = {
-
-          }) {
-            Text(text = "ESQUECI SENHA", fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Color.White)
-          }
         }
-
-        AlertDialogComponent(
-          openDialog = showDialog.value,
-          title = "Erro",
-          message = "Login e/ou senha errada!",
-          onDismissRequest = { showDialog.value = false }
-        )
-
-      }
     }
-  }
 }
-
 
 
 @Preview
 @Composable
 fun LoginScreenPreview() {
-  LoginScreen({ },{ })
+    LoginScreen({ }, { })
 }

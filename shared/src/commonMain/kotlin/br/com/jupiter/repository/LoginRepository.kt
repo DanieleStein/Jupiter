@@ -8,8 +8,9 @@ import kotlinx.coroutines.flow.flow
 
 class LoginRepository(private val api: API = API.instance) {
 
-    fun login(login: Login) = flow {
+    fun getToken(login: Login) = flow {
         API.token = api.login(login).token
+        println("LOGINREPOSITORY" + API.token)
         emit(API.token)
     }
 

@@ -29,7 +29,7 @@ enum class Route {
 fun Navigator(
     modifier: Modifier = Modifier,
     navHostController: NavHostController = rememberNavController(),
-    initial: Route = Route.COURSES
+    initial: Route = Route.LOGIN
 ) {
     val cursos = remember { mutableStateOf(emptyList<Curso>()) }
 
@@ -69,12 +69,9 @@ fun Navigator(
 
         composable("${Route.CONTENT}/{conteudo}") {
             val conteudo = it.arguments?.getString("conteudo")?.toLong()
-            println("Conteudo: ${conteudo}")
-
             if (conteudo != null) {
                 ContentScreen(navHostController = navHostController, id = conteudo)
             }
-
         }
 
 

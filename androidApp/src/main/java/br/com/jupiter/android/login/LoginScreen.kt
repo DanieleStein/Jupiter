@@ -44,28 +44,21 @@ fun LoginScreen(
     val showLoading = remember { mutableStateOf(false) }
 
     val modelLogin = viewModel<LoginViewModel>()
-    val token by modelLogin.token.collectAsState()
+    val loginState by modelLogin.loginState.collectAsState()
 
     MyApplicationTheme() {
         Scaffold(bottomBar = {
             BottomBar(title = "ENTRAR") {
+                modelLogin.getLoginState(
+                    Login(email = email.value.text, senha = senha.value.text)
+                )
 
-                val login = Login(email = email.value.text, senha = senha.value.text)
-                modelLogin.getToken(login)
-
-                if (token is DataResult.Success){
-                    onHomeNavigate.invoke()
-                } else if (token is DataResult.Error){
-                    showDialog.value = true
-                }
-
-                /*when (token) {
-                    is DataResult.Success -> onHomeNavigate.invoke()
+                when (loginState) {
+                    is DataResult.Loading -> showLoading.value = true
                     is DataResult.Error -> showDialog.value = true
-                    is DataResult.Empty -> showLoading.value = true
-                    else -> showLoading.value = true
-                }*/
-
+                    is DataResult.Success -> onHomeNavigate.invoke()
+                    else -> Unit
+                }
 
             }
         }, backgroundColor = Color(0xFF0051EF)) {

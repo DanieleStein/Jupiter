@@ -49,7 +49,7 @@ fun CourseScreen2(categoria: String, cursos: List<Curso> ,navHostController: Nav
 
         item {
           Row(
-            modifier = Modifier.padding(20.dp),//Espaço entre as bordas do Texto
+            //modifier = Modifier.padding(20.dp),//Espaço entre as bordas do Texto
             verticalAlignment = Alignment.CenterVertically //alinhados na vertical
           ) {
             Text(text = cursosFiltrados[0].curso.nome, fontSize = 25.sp, fontWeight = FontWeight.Bold, color = Color.White)
@@ -65,6 +65,8 @@ fun CourseScreen2(categoria: String, cursos: List<Curso> ,navHostController: Nav
             Card() {
               CardCourse(curso = cursosFiltrados[page], onCardNavigation = {}, navHostController = navHostController)
             }
+
+
           }
         }
       }

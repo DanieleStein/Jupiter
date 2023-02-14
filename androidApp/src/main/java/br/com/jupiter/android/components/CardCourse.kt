@@ -41,41 +41,43 @@ fun CardCourse(
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .background(Color.White)
-            .height(116.dp)
-            .fillMaxWidth()
-            .padding()
-            .clickable {}
+          .background(Color.White)
+          .height(116.dp)
+          .padding(horizontal = 32.dp)
+          .clickable {}
     ) {
+      Card() {
         TextButton(onClick = {
-            //onCardNavigation.invoke(curso.id)
+          //onCardNavigation.invoke(curso.id)
 
-            navHostController?.navigate("${Route.CONTENT}/${curso.id}")
+          navHostController?.navigate("${Route.CONTENT}/${curso.id}")
         }) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
+          Row(
+            verticalAlignment = Alignment.CenterVertically
+          ) {
+            Column(
+              horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.porqueinho),
-                        contentDescription = "Dinheiro",
-                        contentScale = ContentScale.Fit,
-                        modifier = Modifier.height(60.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.width(25.dp))
-                Text(
-                    curso!!.titulo,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black,
-                    textAlign = TextAlign.Center
-                )
+              Image(
+                painter = painterResource(id = R.drawable.porqueinho),
+                contentDescription = "Dinheiro",
+                contentScale = ContentScale.Fit,
+                modifier = Modifier.height(60.dp)
+              )
             }
+            Spacer(modifier = Modifier.width(20.dp))
+            Text(
+              curso!!.titulo,
+              fontSize = 20.sp,
+              fontWeight = FontWeight.Bold,
+              color = Color.Black,
+              textAlign = TextAlign.Center
+            )
+          }
         }
+      }
     }
 }
 
@@ -94,25 +96,27 @@ fun CardCourseGroup(
         count = cursosFiltrados.size,
         contentPadding = PaddingValues(horizontal = 32.dp),
         modifier = Modifier
-            .height(125.dp)
-            .clickable {
+          .height(125.dp)
+          .clickable {
 
-            }
+          }
     ) { page ->
         val pageOffset = calculateCurrentOffsetForPage(page).absoluteValue
         Card(
             contentColor = Color.White,
-            modifier = Modifier.graphicsLayer {
+            modifier = Modifier
+              .fillMaxWidth()
+              .graphicsLayer {
                 lerp(
-                    start = 0.90f,
-                    stop = 1f,
-                    fraction = 1f - pageOffset.coerceIn(0f, 1f)
+                  start = 0.90f,
+                  stop = 1f,
+                  fraction = 1f - pageOffset.coerceIn(0f, 1f)
                 ).also {
-                    scaleY = it
-                    scaleX = it
+                  scaleY = it
+                  scaleX = it
                 }
 
-            }
+              }
         ) {
             CardCourse(
                 curso = cursosFiltrados[page],

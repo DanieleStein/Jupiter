@@ -55,12 +55,8 @@ fun CourseScreen(
                             modifier = Modifier.padding(20.dp),//Espaço entre as bordas do Texto
                             verticalAlignment = Alignment.CenterVertically //alinhados na vertical
                         ) {
-                            Text(
-                                text = categoria.nome,
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
+                            Text(text = categoria.nome, fontSize = 22.sp, fontWeight = FontWeight.Bold, color = Color.White)
+
                             Spacer(modifier = Modifier.weight(1f)) //espaço entre a escrita e a seta
                             IconButton(onClick = {
                                 onCategoryDetail.invoke(categoria.name)

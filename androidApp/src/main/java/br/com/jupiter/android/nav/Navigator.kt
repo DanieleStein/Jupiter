@@ -31,10 +31,7 @@ fun Navigator(
     navHostController: NavHostController = rememberNavController(),
     initial: Route = Route.COURSES
 ) {
-
     val cursos = remember { mutableStateOf(emptyList<Curso>()) }
-    val contentViewModel = viewModel<ContentViewModel>()
-    val contents by contentViewModel.contents.collectAsState()
 
     NavHost(
         navController = navHostController,
@@ -75,27 +72,10 @@ fun Navigator(
             println("Conteudo: ${conteudo}")
 
             if (conteudo != null) {
-                contentViewModel.getContent(conteudo)
-                println(contents)
-
-                //ContentScreen(listaDeCurso = , navHostController = , id = )
+                ContentScreen(navHostController = navHostController, id = conteudo)
             }
 
-            ContentScreen(
-                id = conteudo,
-                navHostController = navHostController,
-                listaDeCurso = cursos.value
-            )
         }
-
-/*        composable(Route.CONTENT.name) {
-            ContentScreen(
-                listaDeCurso =  cursos,
-                navHostController = navHostController,
-                id = 8
-            )
-        }*/
-
 
 
         composable(Route.RECOVERY.name) {

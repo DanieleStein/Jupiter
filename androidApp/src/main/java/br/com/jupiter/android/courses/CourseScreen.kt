@@ -21,6 +21,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.CardCourseGroup
+import br.com.jupiter.android.components.ErrorMessage
 import br.com.jupiter.android.components.LoadingIndicator
 import br.com.jupiter.android.components.TopBarPerfilOnly
 import br.com.jupiter.model.Categorias
@@ -37,14 +38,18 @@ fun CourseScreen(
     val courseViewModel = viewModel<CourseViewModel>()
     val cursos by courseViewModel.cursos.collectAsState()
 
+
+
     MyApplicationTheme() {
         Scaffold(
             topBar = { TopBarPerfilOnly(title = "JUPITER") },
             containerColor = Color.Black,
         ) {
 
+            println(cursos)
+
             when (cursos) {
-                is DataResult.Loading -> LoadingIndicator()
+                is DataResult.Loading -> LoadingIndicator() // println("(COURSE SCREEN) CARREGANDO")
                 is DataResult.Error -> ErrorMessage((cursos as DataResult.Error).error)
                 is DataResult.Success -> {
                     LazyColumn(modifier = Modifier.padding(it)) {
@@ -91,15 +96,7 @@ fun CourseScreen(
 }
 
 
-@Composable
-fun ErrorMessage(error: Throwable) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "${error.message}")
-    }
-}
+
 
 
 /*@Preview

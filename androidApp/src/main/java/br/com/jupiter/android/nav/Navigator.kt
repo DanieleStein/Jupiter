@@ -1,16 +1,12 @@
 package br.com.jupiter.android.nav
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import br.com.jupiter.Objects.Mock
-import br.com.jupiter.android.components.CardCourse
 import br.com.jupiter.android.content.ContentScreen
 import br.com.jupiter.android.content.ContentViewModel
 import br.com.jupiter.android.courses.CourseScreen
@@ -18,24 +14,26 @@ import br.com.jupiter.android.courses.CourseScreen2
 import br.com.jupiter.android.courses.CourseViewModel
 import br.com.jupiter.android.login.LoginScreen
 import br.com.jupiter.android.orders.OrderScreen
+import br.com.jupiter.android.recoverPassword.RecoverPasswordScreen
 import br.com.jupiter.android.registerPayment.RegisterPaymentScreen
 import br.com.jupiter.android.registerUser1.RegisterUserScreen
+import br.com.jupiter.model.Curso
+import br.com.jupiter.util.DataResult
 
 
 enum class Route {
-    CONTENT, LOGIN, COURSES, CREATE, PAYMENT, ORDER, COURSES_DETAIL, CARD, CARD_GROUP
+    CONTENT, LOGIN, COURSES, CREATE, PAYMENT, ORDER, COURSES_DETAIL, RECOVERY
 }
 
 @Composable
 fun Navigator(
     modifier: Modifier = Modifier,
     navHostController: NavHostController = rememberNavController(),
-    initial: Route = Route.LOGIN
+    initial: Route = Route.COURSES
 ) {
 
-    val courseViewModel = viewModel<CourseViewModel>()
+    val cursos = remember { mutableStateOf(emptyList<Curso>()) }
     val contentViewModel = viewModel<ContentViewModel>()
-    val cursos by courseViewModel.cursos.collectAsState()
     val contents by contentViewModel.contents.collectAsState()
 
     NavHost(
@@ -47,7 +45,7 @@ fun Navigator(
             LoginScreen(
                 onHomeNavigate = { navHostController.navigate(Route.COURSES.name) },
                 onCreateNavigate = { navHostController.navigate(Route.CREATE.name) }
-            )
+            ) { navHostController.navigate(Route.RECOVERY.name) }
 
         }
 
@@ -55,29 +53,21 @@ fun Navigator(
             CourseScreen(
                 onCategoryDetail = { navHostController.navigate("${Route.COURSES_DETAIL}/$it") },
                 navHostController = navHostController,
-                cursos = cursos
+                onCursos = { dr ->
+                    cursos.value = (dr as DataResult.Success<List<Curso>>).data
+                }
             )
         }
+
 
         composable("${Route.COURSES_DETAIL}/{categoria}") {
             val categoria = it.arguments?.getString("categoria")
             CourseScreen2(
                 categoria = categoria ?: "",
                 navHostController = navHostController,
-                cursos = cursos
+                cursos = cursos.value
             )
         }
-
-
-/*        composable(Route.CARD.name) {
-            CardCourse(
-                curso = Mock.curso1,
-                navHostController = navHostController,
-                onCardNavigation = { id ->
-                    println("Entrei com id: ${id}")
-                    navHostController.navigate("${Route.CONTENT}/$id")
-                })
-        }*/
 
 
         composable("${Route.CONTENT}/{conteudo}") {
@@ -90,7 +80,12 @@ fun Navigator(
 
                 //ContentScreen(listaDeCurso = , navHostController = , id = )
             }
-            ContentScreen(id = conteudo, navHostController = navHostController, listaDeCurso = cursos)
+
+            ContentScreen(
+                id = conteudo,
+                navHostController = navHostController,
+                listaDeCurso = cursos.value
+            )
         }
 
 /*        composable(Route.CONTENT.name) {
@@ -101,6 +96,11 @@ fun Navigator(
             )
         }*/
 
+
+
+        composable(Route.RECOVERY.name) {
+            RecoverPasswordScreen()
+        }
 
 
         composable(Route.CREATE.name) {

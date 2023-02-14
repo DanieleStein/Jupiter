@@ -17,10 +17,10 @@ class LoginViewModel(
     private val repository: LoginRepository = LoginRepository.instance
 ) : ViewModel() {
 
-    private val _token = MutableStateFlow<String?>(null)
-    val token: StateFlow<String?> = _token
+    private val _token: MutableStateFlow<DataResult<String>> = MutableStateFlow(DataResult.Empty)
+    val token: StateFlow<DataResult<String>> = _token
 
-    fun getToken(login: Login)= viewModelScope.launch {
+    fun getToken(login: Login) = viewModelScope.launch {
         repository.getToken(login).collectLatest {
             _token.value = it
         }

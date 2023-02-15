@@ -2,16 +2,13 @@ package br.com.jupiter.android.nav
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.jupiter.android.content.ContentScreen
-import br.com.jupiter.android.content.ContentViewModel
 import br.com.jupiter.android.courses.CourseScreen
 import br.com.jupiter.android.courses.CourseScreen2
-import br.com.jupiter.android.courses.CourseViewModel
 import br.com.jupiter.android.login.LoginScreen
 import br.com.jupiter.android.orders.OrderScreen
 import br.com.jupiter.android.recoverPassword.RecoverPasswordScreen
@@ -76,7 +73,7 @@ fun Navigator(
 
 
         composable(Route.RECOVERY.name) {
-            RecoverPasswordScreen()
+            RecoverPasswordScreen(navHostController = navHostController)
         }
 
 
@@ -84,7 +81,8 @@ fun Navigator(
             RegisterUserScreen(
                 onNextButtonClicked = {
                     navHostController.navigate(Route.PAYMENT.name)
-                }
+                }, navHostController = navHostController
+
             )
         }
 
@@ -92,15 +90,13 @@ fun Navigator(
             RegisterPaymentScreen(
                 onNextButtonClicked = {
                     navHostController.navigate(Route.ORDER.name)
-                }
+                }, navHostController = navHostController
             )
         }
 
         composable(Route.ORDER.name) {
             OrderScreen(
-                onNextButtonClicked = {
-                    navHostController.navigate(Route.COURSES.name)
-                }
+                onNextButtonClicked = {}, navHostController = navHostController
             )
         }
 

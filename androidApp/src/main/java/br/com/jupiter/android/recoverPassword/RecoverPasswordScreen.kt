@@ -18,16 +18,17 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.BottomBar
 import br.com.jupiter.android.components.TopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RecoverPasswordScreen() {
+fun RecoverPasswordScreen(navHostController: NavHostController?) {
   MyApplicationTheme() {
     Scaffold(
-      topBar = { TopBar(title = "JUPITER")},
+      topBar = { TopBar(title = "JUPITER", navHostController = navHostController)},
       bottomBar = { BottomBar(title = "CONFIRMAR") {
       }}
     ) {
@@ -89,5 +90,5 @@ fun RecoverPasswordScreen() {
 @Preview
 @Composable
 fun RecoverPasswordScreenPreview() {
-  RecoverPasswordScreen()
+  RecoverPasswordScreen(null)
 }

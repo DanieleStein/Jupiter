@@ -34,7 +34,7 @@ fun ContentScreen(navHostController: NavHostController?, id: Long?) {
 
     MyApplicationTheme() {
         Scaffold(
-            topBar = { TopBarPerfilOnly(title = "JUPITER") },
+            topBar = { TopBarPerfil(title = "JUPITER", navHostController=navHostController) },
             containerColor = Color.Black,
         ) {
 
@@ -52,18 +52,6 @@ fun ContentScreen(navHostController: NavHostController?, id: Long?) {
                             .padding(horizontal = 23.dp, vertical = 23.dp)
                     ) {
 
-                        item {
-                            Row(
-                                Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.Center
-                            ) {
-                                Button(onClick = {
-                                    navHostController?.navigate(Route.COURSES.name)
-                                }) {
-                                    Text(text = "Home")
-                                }
-                            }
-                        }
 
                         item {
                             Spacer(modifier = Modifier.height(15.dp))

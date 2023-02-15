@@ -20,6 +20,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.BottomBar
 import br.com.jupiter.android.components.TopBar
@@ -28,6 +29,7 @@ import br.com.jupiter.android.components.TopBar
 @Composable
 fun RegisterPaymentScreen(
     onNextButtonClicked: () -> Unit,
+    navHostController: NavHostController?,
 ) {
 
     val nomeCartao = remember { mutableStateOf(TextFieldValue()) }
@@ -37,7 +39,7 @@ fun RegisterPaymentScreen(
 
     MyApplicationTheme() {
         Scaffold(
-            topBar = { TopBar(title = "JUPITER") },
+            topBar = { TopBar(title = "JUPITER", navHostController=navHostController) },
             bottomBar = {
                 BottomBar(
                     title = "CONTINUAR", onClick = {
@@ -112,5 +114,5 @@ fun RegisterPaymentScreen(
 @Preview
 @Composable
 fun RegisterPaymentScreenPreview() {
-    RegisterPaymentScreen() {}
+    RegisterPaymentScreen( navHostController =null, onNextButtonClicked = {})
 }

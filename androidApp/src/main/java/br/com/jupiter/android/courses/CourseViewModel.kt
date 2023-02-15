@@ -20,16 +20,16 @@ class CourseViewModel(
     val cursos: StateFlow<DataResult<List<Curso>>> = _cursos
 
     init {
-        login()
+        getCursos()
     }
 
-    fun login() = viewModelScope.launch {
+/*    fun login() = viewModelScope.launch {
         API.token = API.instance.login(
             Login(email = "jamtibaes@yahoo.com.brr", senha = "1234")
         ).token
     }.invokeOnCompletion {
         getCursos()
-    }
+    }*/
 
     fun getCursos() = viewModelScope.launch {
         repository.getCursos().collectLatest {

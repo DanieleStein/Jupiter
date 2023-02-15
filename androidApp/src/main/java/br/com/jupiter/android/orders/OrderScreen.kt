@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.BottomBar
 import br.com.jupiter.android.components.TopBar
@@ -22,10 +23,11 @@ import br.com.jupiter.android.components.TopBar
 @Composable
 fun OrderScreen(
     onNextButtonClicked: () -> Unit,
+    navHostController: NavHostController?,
 ) {
     MyApplicationTheme() {
         Scaffold(
-            topBar = { TopBar(title = "JUPITER") },
+            topBar = { TopBar(title = "JUPITER", navHostController = navHostController) },
             bottomBar = {
                 BottomBar(title = "CONFIRMAR", onClick = {
                     onNextButtonClicked.invoke()
@@ -92,5 +94,5 @@ fun OrderScreen(
 @Preview
 @Composable
 fun OrderScreenPreview() {
-    OrderScreen() {}
+    OrderScreen({},navHostController = null)
 }

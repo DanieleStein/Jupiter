@@ -20,15 +20,18 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.BottomBar
 import br.com.jupiter.android.components.TopBar
-import br.com.jupiter.model.Usuario
+import br.com.jupiter.android.components.TopBarCourse
+import br.com.jupiter.android.components.TopBarPerfil
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterUserScreen(
     onNextButtonClicked: () -> Unit,
+    navHostController: NavHostController?,
 ) {
 
     val nome = remember { mutableStateOf(TextFieldValue()) }
@@ -39,7 +42,7 @@ fun RegisterUserScreen(
 
     MyApplicationTheme() {
         Scaffold(
-            topBar = { TopBar(title = "JUPITER") },
+            topBar = { TopBar(title = "JUPITER", navHostController = navHostController) },
             bottomBar = {
                 BottomBar(title = "CONTINUAR", onClick = {
                     /*val usuario: Usuario = Usuario(
@@ -136,5 +139,5 @@ fun RegisterUserScreen(
 @Preview
 @Composable
 fun RegisterUserScreenPreview() {
-    RegisterUserScreen(onNextButtonClicked = {})
+    RegisterUserScreen(onNextButtonClicked = {}, navHostController = null)
 }

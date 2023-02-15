@@ -23,7 +23,7 @@ import androidx.navigation.NavHostController
 import br.com.jupiter.android.R
 
 @Composable
-fun TopBar(title: String) {
+fun TopBar(title: String, navHostController: NavHostController?) {
     TopAppBar(
         title = {
             Text(
@@ -32,6 +32,11 @@ fun TopBar(title: String) {
                 fontSize = 36.sp,
                 color = Color.White
             )
+        },
+        navigationIcon = {
+            IconButton(onClick = { navHostController?.popBackStack()  }) {
+                Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.White)
+            }
         },
         backgroundColor = Color(0xFF0051EF)
     )
@@ -49,14 +54,14 @@ fun TopBarPerfil(title: String, navHostController: NavHostController?) {
             )
         },
         navigationIcon = {
-            IconButton(onClick = {}) {
+            IconButton(onClick = { navHostController?.popBackStack()  }) {
                 Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.White)
             }
         },
 
         actions = {
 
-            IconButton(onClick = { navHostController?.popBackStack() }) {
+            IconButton(onClick = { }) {
                 Image(
                     painter = painterResource(R.drawable.ic_profile2),
                     contentDescription = "Profile",
@@ -150,7 +155,7 @@ fun TopBarPerfilOnly(title: String) {
 @Preview
 @Composable
 fun TopBar1Preview() {
-    TopBar(title = "JUPITER")
+    TopBar(title = "JUPITER", navHostController = null)
 }
 
 @Preview

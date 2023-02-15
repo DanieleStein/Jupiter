@@ -38,15 +38,11 @@ fun CourseScreen(
     val courseViewModel = viewModel<CourseViewModel>()
     val cursos by courseViewModel.cursos.collectAsState()
 
-
-
     MyApplicationTheme() {
         Scaffold(
             topBar = { TopBarPerfilOnly(title = "JUPITER") },
             containerColor = Color.Black,
         ) {
-
-            println(cursos)
 
             when (cursos) {
                 is DataResult.Loading -> LoadingIndicator() // println("(COURSE SCREEN) CARREGANDO")
@@ -64,7 +60,7 @@ fun CourseScreen(
                                 ) {
                                     Text(
                                         text = categoria.nome,
-                                        fontSize = 20.sp,
+                                        fontSize = 22.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = Color.White
                                     )
@@ -75,6 +71,7 @@ fun CourseScreen(
                                         Icon(Icons.Filled.ArrowForward, "backIcon", tint = Color.White)
                                     }
                                 }
+
                             }
 
                             item {

@@ -6,8 +6,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,14 +20,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.R
-import br.com.jupiter.android.courses.CourseViewModel
 import br.com.jupiter.android.nav.Route
 import br.com.jupiter.model.Categorias
 import br.com.jupiter.model.Curso
+import br.com.jupiter.util.DataResult
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
@@ -85,12 +84,15 @@ fun CardCourse(
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun CardCourseGroup(
-    cursos: List<Curso>,
+    listDataResult: DataResult<List<Curso>>,
     categoria: String, onCard: (String) -> Unit,
     navHostController: NavHostController?
 ) {
 
-    val cursosFiltrados: List<Curso> = cursos.filter { it.curso.toString() == categoria }
+    val cursos = remember { mutableStateOf(emptyList<Curso>()) }
+    cursos.value = (listDataResult as DataResult.Success<List<Curso>>).data
+
+    val cursosFiltrados: List<Curso> = cursos.value.filter { it.curso.toString() == categoria }
 
     HorizontalPager(
         count = cursosFiltrados.size,
@@ -133,13 +135,13 @@ fun CardCoursePreview() {
     CardCourse(Mock.curso1, {}, navHostController = null)
 }
 
-@Preview
+/*@Preview
 @Composable
 fun CardCourseGroupPreview() {
     CardCourseGroup(
-        cursos = Mock.listaDeCursos,
+        listDataResult = Mock.listaDeCursos,
         categoria = Categorias.FINANCAS.name,
         navHostController = null,
         onCard = {})
-}
+}*/
 

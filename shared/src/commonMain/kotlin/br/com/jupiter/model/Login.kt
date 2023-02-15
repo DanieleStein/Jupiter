@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Login(
-    private val email: String,
+    val email: String,
     private val senha: String
 ) {
 

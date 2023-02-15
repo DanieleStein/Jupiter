@@ -28,34 +28,39 @@ import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.R
 import br.com.jupiter.android.components.AlertDialogComponent
 import br.com.jupiter.android.components.BottomBar
+import br.com.jupiter.android.components.LoadingIndicator
 import br.com.jupiter.model.Login
+import br.com.jupiter.util.DataResult
 
 
 @Composable
 fun LoginScreen(
-    onHomeNavigate: () -> Unit, onCreateNavigate: () -> Unit
+    onHomeNavigate: () -> Unit, onCreateNavigate: () -> Unit, onRecoveryNavigate: () -> Unit
 ) {
     val email = remember { mutableStateOf(TextFieldValue()) }
     val senha = remember { mutableStateOf(TextFieldValue()) }
     val senhavisivel = remember { mutableStateOf(false) }
     val showDialog = remember { mutableStateOf(false) }
+    val showLoading = remember { mutableStateOf(false) }
 
     val modelLogin = viewModel<LoginViewModel>()
-    val token by modelLogin.token.collectAsState()
+    val loginState by modelLogin.loginState.collectAsState()
 
     MyApplicationTheme() {
         Scaffold(bottomBar = {
-            BottomBar(title = "ENTRAR", onClick = {
-                val login = Login(email = email.value.text, senha = senha.value.text)
-                modelLogin.getToken(login)
+            BottomBar(title = "ENTRAR") {
+                modelLogin.getLoginState(
+                    Login(email = email.value.text, senha = senha.value.text)
+                )
 
-                if (token.isNullOrEmpty()) {
-                    showDialog.value = true
-                } else {
-                    onHomeNavigate.invoke()
+                when (loginState) {
+                    is DataResult.Loading -> showLoading.value = true
+                    is DataResult.Error -> showDialog.value = true
+                    is DataResult.Success -> onHomeNavigate.invoke()
+                    else -> Unit
                 }
 
-            })
+            }
         }, backgroundColor = Color(0xFF0051EF)) {
             Column(
                 verticalArrangement = Arrangement.Center,
@@ -95,10 +100,9 @@ fun LoginScreen(
                   .fillMaxWidth())*/
 
                 Spacer(modifier = Modifier.height(20.dp))
-                OutlinedTextField(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color(0xFFD9D9D9)),
+                OutlinedTextField(modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color(0xFFD9D9D9)),
                     value = senha.value,
                     label = { Text(text = "Senha") },
                     onValueChange = { senha.value = it },
@@ -115,8 +119,7 @@ fun LoginScreen(
                         IconButton(onClick = { senhavisivel.value = senhavisivel.value.not() }) {
                             Icon(imageVector = icone, contentDescription = description)
                         }
-                    }
-                )
+                    })
                 Spacer(modifier = Modifier.height(4.dp))
                 Row(
                     verticalAlignment = Alignment.CenterVertically
@@ -131,7 +134,7 @@ fun LoginScreen(
                     }
                     Spacer(modifier = Modifier.weight(1f))
                     TextButton(onClick = {
-
+                        onRecoveryNavigate.invoke()
                     }) {
                         Text(
                             text = "ESQUECI SENHA",
@@ -141,13 +144,18 @@ fun LoginScreen(
                         )
                     }
                 }
+                Spacer(modifier = Modifier.height(4.dp))
 
-                AlertDialogComponent(
-                    openDialog = showDialog.value,
+                Row() {
+                    if (showLoading.value) {
+                        LoadingIndicator()
+                    }
+                }
+
+                AlertDialogComponent(openDialog = showDialog.value,
                     title = "Erro",
                     message = "Login e/ou senha errada!",
-                    onDismissRequest = { showDialog.value = false }
-                )
+                    onDismissRequest = { showDialog.value = false })
 
             }
         }
@@ -158,5 +166,5 @@ fun LoginScreen(
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen({ }, { })
+    LoginScreen({ }, { }, { })
 }

@@ -6,6 +6,7 @@
     <application
         android:allowBackup="false"
         android:usesCleartextTraffic="true"
+        android:enableOnBackInvokedCallback="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.SplashScreen">
         <activity

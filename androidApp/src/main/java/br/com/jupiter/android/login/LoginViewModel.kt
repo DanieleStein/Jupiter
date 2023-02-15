@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.jupiter.model.Login
 import br.com.jupiter.network.API
+import br.com.jupiter.network.Token
 import br.com.jupiter.util.DataResult
 import br.com.jupiter.repository.LoginRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,12 +18,13 @@ class LoginViewModel(
     private val repository: LoginRepository = LoginRepository.instance
 ) : ViewModel() {
 
-    private val _token = MutableStateFlow<String?>(null)
-    val token: StateFlow<String?> = _token
+    private val _loginState: MutableStateFlow<DataResult<Token>> =
+        MutableStateFlow(DataResult.Empty)
+    val loginState: StateFlow<DataResult<Token>> = _loginState
 
-    fun getToken(login: Login)= viewModelScope.launch {
+    fun getLoginState(login: Login) = viewModelScope.launch {
         repository.getToken(login).collectLatest {
-            _token.value = it
+            _loginState.value = it
         }
     }
 

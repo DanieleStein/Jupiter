@@ -6,6 +6,7 @@ import br.com.jupiter.model.Curso
 import br.com.jupiter.model.Login
 import br.com.jupiter.network.API
 import br.com.jupiter.repository.CursoRepository
+import br.com.jupiter.util.DataResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -15,8 +16,8 @@ class CourseViewModel(
     val repository: CursoRepository = CursoRepository.instance
 ) : ViewModel() {
 
-    private val _cursos = MutableStateFlow<List<Curso>>(emptyList())
-    val cursos: StateFlow<List<Curso>> = _cursos
+    private val _cursos = MutableStateFlow<DataResult<List<Curso>>>(DataResult.Empty)
+    val cursos: StateFlow<DataResult<List<Curso>>> = _cursos
 
     init {
         login()

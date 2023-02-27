@@ -60,7 +60,7 @@ fun ProfileScreen() {
           )
 
           Spacer(modifier = Modifier.height(15.dp))
-          Text(text = "EMAIl", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+          Text(text = "EMAIL", fontWeight = FontWeight.Bold, fontSize = 15.sp)
           OutlinedTextField(
             modifier = Modifier
               .fillMaxWidth()
@@ -109,7 +109,7 @@ fun ProfileScreen() {
           )
 
           Spacer(modifier = Modifier.height(15.dp))
-          Text(text = "CPF", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+          Text(text = "NÚMERO DO CARTÃO", fontWeight = FontWeight.Bold, fontSize = 15.sp)
           OutlinedTextField(
             modifier = Modifier
               .fillMaxWidth()
@@ -119,7 +119,7 @@ fun ProfileScreen() {
           )
 
           Spacer(modifier = Modifier.height(15.dp))
-          Text(text = "CPF", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+          Text(text = "DATA DE VALIDADE", fontWeight = FontWeight.Bold, fontSize = 15.sp)
           OutlinedTextField(
             modifier = Modifier
               .fillMaxWidth()

@@ -43,8 +43,7 @@ fun RegisterUserScreen(
     MyApplicationTheme() {
         Scaffold(
             topBar = { TopBar(title = "JUPITER", navHostController = navHostController) },
-            bottomBar = {
-                BottomBar(title = "CONTINUAR", onClick = {
+            bottomBar = { BottomBar(title = "CONTINUAR", onClick = {
                     /*val usuario: Usuario = Usuario(
                         id = 0,
                         nome = nome.value.text,

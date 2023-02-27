@@ -40,61 +40,62 @@ import kotlin.math.absoluteValue
 
 @Composable
 fun CardCourse(
-    curso: Curso,
-    onCardNavigation: (Long) -> Unit,
-    navHostController: NavHostController?
+  curso: Curso,
+  onCardNavigation: (Long) -> Unit,
+  navHostController: NavHostController?
 ) {
-  val painter = rememberAsyncImagePainter( model =
-  ImageRequest.Builder(LocalContext.current)
-    .data("https://picsum.photos/200/300?random=2")
-    .size(60)
-    .build()
+  val painter = rememberAsyncImagePainter(
+    model =
+    ImageRequest.Builder(LocalContext.current)
+      .data("https://picsum.photos/200/300?random=2")
+      .size(60)
+      .build()
   )
 
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-          .background(Color.White)
-          .height(116.dp)
-          .padding(horizontal = 32.dp)
-          .clickable {}
-    ) {
-      Card() {
-        TextButton(onClick = {
-          //onCardNavigation.invoke(curso.id)
+  Column(
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally,
+    modifier = Modifier
+      .background(Color.White)
+      .height(116.dp)
+      .padding(horizontal = 32.dp)
+      .clickable {}
+  ) {
+    Card() {
+      TextButton(onClick = {
+        //onCardNavigation.invoke(curso.id)
 
-          navHostController?.navigate("${Route.CONTENT}/${curso.id}")
-        }) {
-          Row(
-            verticalAlignment = Alignment.CenterVertically
+        navHostController?.navigate("${Route.CONTENT}/${curso.id}")
+      }) {
+        Row(
+          verticalAlignment = Alignment.CenterVertically
+        ) {
+          Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
           ) {
-            Column(
-              horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-              Image(
-                painter = painter,
-                //painter = painterResource(id = R.drawable.porqueinho),
-                contentDescription = "Dinheiro",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                  .height(70.dp)
-                  .width(70.dp)
-                  .clip(CircleShape)
-              )
-            }
-            Spacer(modifier = Modifier.width(20.dp))
-            Text(
-              curso!!.titulo,
-              fontSize = 20.sp,
-              fontWeight = FontWeight.Bold,
-              color = Color.Black,
-              textAlign = TextAlign.Center
+            Image(
+              painter = painter,
+              //painter = painterResource(id = R.drawable.porqueinho),
+              contentDescription = "Dinheiro",
+              contentScale = ContentScale.Crop,
+              modifier = Modifier
+                .height(70.dp)
+                .width(70.dp)
+                .clip(CircleShape)
             )
           }
+          Spacer(modifier = Modifier.width(20.dp))
+          Text(
+            curso!!.titulo,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            textAlign = TextAlign.Center
+          )
         }
       }
     }
+  }
 }
 
 

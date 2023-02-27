@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.com.jupiter.android.R
+import br.com.jupiter.android.nav.Route
 
 @Composable
 fun TopBar(title: String, navHostController: NavHostController?) {
@@ -61,7 +62,9 @@ fun TopBarPerfil(title: String, navHostController: NavHostController?) {
 
         actions = {
 
-            IconButton(onClick = { }) {
+            IconButton(onClick = {
+                navHostController?.navigate(Route.PROFILE.name)
+            }) {
                 Image(
                     painter = painterResource(R.drawable.ic_profile2),
                     contentDescription = "Profile",
@@ -174,7 +177,7 @@ fun TopBarProfile(title: String, navHostController: NavHostController?) {
       )
     },
     navigationIcon = {
-      IconButton(onClick = {}) {
+      IconButton(onClick = { navHostController?.popBackStack() }) {
         Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.White)
       }
     },

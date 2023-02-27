@@ -3,36 +3,30 @@ package br.com.jupiter.android.profile
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.BottomBar
 import br.com.jupiter.android.components.TopBarProfile
+import br.com.jupiter.android.nav.Route
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(navHostController: NavHostController?) {
   MyApplicationTheme() {
     Scaffold(
-      topBar = { TopBarProfile(title = "JUPITER", navHostController = null) },
-      bottomBar = { BottomBar(title = "CONFIRMAR", onClick = {} )}
+      topBar = { TopBarProfile(title = "JUPITER", navHostController = navHostController) },
+      bottomBar = { BottomBar(title = "CONFIRMAR", onClick = { navHostController?.navigate(Route.COURSES.name) } )}
     ) {
       LazyColumn(
         modifier = Modifier
@@ -137,5 +131,5 @@ fun ProfileScreen() {
 @Composable
 @Preview
 fun ProfileScreenPreview() {
-  ProfileScreen()
+  ProfileScreen(navHostController = null)
 }

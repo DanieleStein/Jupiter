@@ -11,6 +11,7 @@ import br.com.jupiter.android.courses.CourseScreen
 import br.com.jupiter.android.courses.CourseScreen2
 import br.com.jupiter.android.login.LoginScreen
 import br.com.jupiter.android.orders.OrderScreen
+import br.com.jupiter.android.profile.ProfileScreen
 import br.com.jupiter.android.recoverPassword.RecoverPasswordScreen
 import br.com.jupiter.android.registerPayment.RegisterPaymentScreen
 import br.com.jupiter.android.registerUser1.RegisterUserScreen
@@ -19,7 +20,7 @@ import br.com.jupiter.util.DataResult
 
 
 enum class Route {
-    CONTENT, LOGIN, COURSES, CREATE, PAYMENT, ORDER, COURSES_DETAIL, RECOVERY
+    CONTENT, LOGIN, COURSES, CREATE, PAYMENT, ORDER, COURSES_DETAIL, RECOVERY, PROFILE
 }
 
 @Composable
@@ -74,6 +75,10 @@ fun Navigator(
 
         composable(Route.RECOVERY.name) {
             RecoverPasswordScreen(navHostController = navHostController)
+        }
+
+        composable(Route.PROFILE.name) {
+            ProfileScreen(navHostController = navHostController)
         }
 
 

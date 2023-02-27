@@ -9,7 +9,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.com.jupiter.android.R
+import br.com.jupiter.android.nav.Route
 
 @Composable
 fun TopBar(title: String, navHostController: NavHostController?) {
@@ -34,7 +35,7 @@ fun TopBar(title: String, navHostController: NavHostController?) {
             )
         },
         navigationIcon = {
-            IconButton(onClick = { navHostController?.popBackStack()  }) {
+            IconButton(onClick = { navHostController?.popBackStack() }) {
                 Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.White)
             }
         },
@@ -54,14 +55,16 @@ fun TopBarPerfil(title: String, navHostController: NavHostController?) {
             )
         },
         navigationIcon = {
-            IconButton(onClick = { navHostController?.popBackStack()  }) {
+            IconButton(onClick = { navHostController?.popBackStack() }) {
                 Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.White)
             }
         },
 
         actions = {
 
-            IconButton(onClick = { }) {
+            IconButton(onClick = {
+                navHostController?.navigate(Route.PROFILE.name)
+            }) {
                 Image(
                     painter = painterResource(R.drawable.ic_profile2),
                     contentDescription = "Profile",
@@ -78,7 +81,14 @@ fun TopBarPerfil(title: String, navHostController: NavHostController?) {
 }
 
 @Composable
-fun TopBarCourse(titulo: String, navHostController: NavHostController?) {
+fun TopBarCourse(
+    titulo: String,
+    navHostController: NavHostController?,
+    onSearchClick: (Boolean) -> Unit
+) {
+
+    //val showSearch = remember { mutableStateOf(false) }
+
     TopAppBar(
         title = {
             Text(
@@ -95,7 +105,11 @@ fun TopBarCourse(titulo: String, navHostController: NavHostController?) {
         },
 
         actions = {
-            IconButton(onClick = {}) {
+            IconButton(onClick = {
+                /*onSearchClick.invoke(showSearch.value)
+                println("TOPBAR: $showSearch")
+                showSearch.value = !showSearch.value*/
+            }) {
                 Image(
                     painter = painterResource(R.drawable.baseline_search_24),
                     contentDescription = "Profile",
@@ -163,7 +177,7 @@ fun TopBarProfile(title: String, navHostController: NavHostController?) {
       )
     },
     navigationIcon = {
-      IconButton(onClick = {}) {
+      IconButton(onClick = { navHostController?.popBackStack() }) {
         Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.White)
       }
     },
@@ -193,7 +207,9 @@ fun TopBarPerfilPreview() {
 @Preview
 @Composable
 fun TopBarCoursePreview() {
-    TopBarCourse(titulo = "JUPITER", navHostController = null)
+    TopBarCourse(titulo = "JUPITER", navHostController = null) {
+
+    }
 }
 
 @Preview

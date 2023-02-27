@@ -4,15 +4,19 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -27,6 +31,8 @@ import br.com.jupiter.android.nav.Route
 import br.com.jupiter.model.Categorias
 import br.com.jupiter.model.Curso
 import br.com.jupiter.util.DataResult
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
@@ -34,50 +40,62 @@ import kotlin.math.absoluteValue
 
 @Composable
 fun CardCourse(
-    curso: Curso,
-    onCardNavigation: (Long) -> Unit,
-    navHostController: NavHostController?
+  curso: Curso,
+  onCardNavigation: (Long) -> Unit,
+  navHostController: NavHostController?
 ) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-          .background(Color.White)
-          .height(116.dp)
-          .padding(horizontal = 32.dp)
-          .clickable {}
-    ) {
-      Card() {
-        TextButton(onClick = {
-          //onCardNavigation.invoke(curso.id)
+  val painter = rememberAsyncImagePainter(
+    model =
+    ImageRequest.Builder(LocalContext.current)
+      .data("https://picsum.photos/200/300?random=2")
+      .size(60)
+      .build()
+  )
 
-          navHostController?.navigate("${Route.CONTENT}/${curso.id}")
-        }) {
-          Row(
-            verticalAlignment = Alignment.CenterVertically
+  Column(
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally,
+    modifier = Modifier
+      .background(Color.White)
+      .height(116.dp)
+      .padding(horizontal = 32.dp)
+      .clickable {}
+  ) {
+    Card() {
+      TextButton(onClick = {
+        //onCardNavigation.invoke(curso.id)
+
+        navHostController?.navigate("${Route.CONTENT}/${curso.id}")
+      }) {
+        Row(
+          verticalAlignment = Alignment.CenterVertically
+        ) {
+          Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
           ) {
-            Column(
-              horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-              Image(
-                painter = painterResource(id = R.drawable.porqueinho),
-                contentDescription = "Dinheiro",
-                contentScale = ContentScale.Fit,
-                modifier = Modifier.height(60.dp)
-              )
-            }
-            Spacer(modifier = Modifier.width(20.dp))
-            Text(
-              curso!!.titulo,
-              fontSize = 20.sp,
-              fontWeight = FontWeight.Bold,
-              color = Color.Black,
-              textAlign = TextAlign.Center
+            Image(
+              painter = painter,
+              //painter = painterResource(id = R.drawable.porqueinho),
+              contentDescription = "Dinheiro",
+              contentScale = ContentScale.Crop,
+              modifier = Modifier
+                .height(70.dp)
+                .width(70.dp)
+                .clip(CircleShape)
             )
           }
+          Spacer(modifier = Modifier.width(20.dp))
+          Text(
+            curso!!.titulo,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            textAlign = TextAlign.Center
+          )
         }
       }
     }
+  }
 }
 
 

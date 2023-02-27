@@ -162,6 +162,26 @@ fun TopBarPerfilOnly(title: String) {
     )
 }
 
+@Composable
+fun TopBarProfile(title: String, navHostController: NavHostController?) {
+  TopAppBar(
+    title = {
+      Text(
+        text = title,
+        fontWeight = FontWeight.Bold,
+        fontSize = 36.sp,
+        color = Color.White
+      )
+    },
+    navigationIcon = {
+      IconButton(onClick = {}) {
+        Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.White)
+      }
+    },
+    backgroundColor = Color(0xFF0051EF)
+  )
+}
+
 
 @Preview
 @Composable
@@ -187,4 +207,10 @@ fun TopBarCoursePreview() {
     TopBarCourse(titulo = "JUPITER", navHostController = null) {
 
     }
+}
+
+@Preview
+@Composable
+fun TopBarProfilePreview() {
+  TopBarProfile(title = "JUPITER", navHostController = null)
 }

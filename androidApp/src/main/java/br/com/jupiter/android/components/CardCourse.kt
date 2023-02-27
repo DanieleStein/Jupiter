@@ -4,15 +4,19 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -27,6 +31,8 @@ import br.com.jupiter.android.nav.Route
 import br.com.jupiter.model.Categorias
 import br.com.jupiter.model.Curso
 import br.com.jupiter.util.DataResult
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
@@ -38,6 +44,13 @@ fun CardCourse(
     onCardNavigation: (Long) -> Unit,
     navHostController: NavHostController?
 ) {
+  val painter = rememberAsyncImagePainter( model =
+  ImageRequest.Builder(LocalContext.current)
+    .data("https://picsum.photos/200/300?random=2")
+    .size(60)
+    .build()
+  )
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -60,10 +73,14 @@ fun CardCourse(
               horizontalAlignment = Alignment.CenterHorizontally,
             ) {
               Image(
-                painter = painterResource(id = R.drawable.porqueinho),
+                painter = painter,
+                //painter = painterResource(id = R.drawable.porqueinho),
                 contentDescription = "Dinheiro",
-                contentScale = ContentScale.Fit,
-                modifier = Modifier.height(60.dp)
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                  .height(70.dp)
+                  .width(70.dp)
+                  .clip(CircleShape)
               )
             }
             Spacer(modifier = Modifier.width(20.dp))

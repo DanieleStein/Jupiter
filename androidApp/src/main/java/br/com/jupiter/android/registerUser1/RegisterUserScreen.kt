@@ -57,8 +57,7 @@ fun RegisterUserScreen(
                     )*/
                     //onNextButtonClicked(usuario)
                     onNextButtonClicked.invoke()
-
-                })
+            })
             }
         ) {
 

@@ -71,19 +71,13 @@ fun LoginScreen(
                     .verticalScroll(rememberScrollState())
             ) {
 
-                Spacer(modifier = Modifier.height(100.dp))
+                Spacer(modifier = Modifier.height(80.dp))
                 Image(
-                    painter = painterResource(R.drawable.jupiterlogin3),
-                    contentDescription = "Profile",
-                    modifier = Modifier.fillMaxWidth()
+                    painter = painterResource(R.drawable.jupiteragora),
+                    contentDescription = "Jupiter",
+                    modifier = Modifier.size(250.dp)
                 )
 
-                /*Spacer(modifier = Modifier.height(10.dp))
-                Text(text = "EMAIL", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White, modifier = Modifier
-                  .padding()
-                  .fillMaxWidth())*/
-
-                Spacer(modifier = Modifier.height(5.dp))
                 OutlinedTextField(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -93,11 +87,6 @@ fun LoginScreen(
                     onValueChange = { email.value = it },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
                 )
-
-                /*Spacer(modifier = Modifier.height(20.dp))
-                Text(text = "SENHA", fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White, modifier = Modifier
-                  .padding()
-                  .fillMaxWidth())*/
 
                 Spacer(modifier = Modifier.height(20.dp))
                 OutlinedTextField(modifier = Modifier

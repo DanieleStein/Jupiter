@@ -12,6 +12,7 @@ sealed class DataResult<out T: Any> {
 }
 
 fun <T : Any> Flow<DataResult<T>>.updateStates() =
+
     retryWhen { cause, attempt ->
         if (cause is IOException && attempt < 3) {
             delay(2000)

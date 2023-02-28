@@ -1,9 +1,6 @@
 package br.com.jupiter.Objects
 
-import br.com.jupiter.model.Categorias
-import br.com.jupiter.model.Conteudo
-import br.com.jupiter.model.Criador
-import br.com.jupiter.model.Curso
+import br.com.jupiter.model.*
 
 object Mock {
 
@@ -38,7 +35,6 @@ object Mock {
         url = "https://youtube.com.br",
         ordemConteudo = 4
     )
-
 
 
     val criador: Criador = Criador(
@@ -83,6 +79,44 @@ object Mock {
     val listaDeCursos: List<Curso> = listOf(
         curso1, curso2, curso3
     )
+
+    val cartao: Cartao = Cartao(
+        id = 1,
+        nomeCartao = "Daniele Stein",
+        numeroCartao = "1234.1234.1234.1234",
+        codSeguranca = "123",
+        dataValidade = "01/01/2030",
+        usuario = null
+    )
+
+
+
+    val usuario: Usuario = Usuario(
+        id = 1,
+        nome = "Daniele Stein",
+        email = "dani@email.com.br",
+        senha = "1234",
+        cpf = "123.456.789-00",
+        dataNascimento = "01/01/2000",
+        cartao = listOf(cartao),
+        pedido = null
+    )
+
+    val pedido: Pedido = Pedido(
+        id = 1,
+        periodoContratadoMeses = 12,
+        dataInicial = "01/03/2023",
+        valor = 25.0,
+        usuario = usuario
+    )
+
+
+
+
+
+
+
+
 
 
 }

@@ -7,129 +7,186 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.BottomBar
+import br.com.jupiter.android.components.LoadingIndicator
 import br.com.jupiter.android.components.TopBarProfile
+import br.com.jupiter.android.login.LoginViewModel
 import br.com.jupiter.android.nav.Route
+import br.com.jupiter.model.Usuario
+import br.com.jupiter.util.DataResult
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen(navHostController: NavHostController?) {
-  MyApplicationTheme() {
-    Scaffold(
-      topBar = { TopBarProfile(title = "JUPITER", navHostController = navHostController) },
-      bottomBar = { BottomBar(title = "CONFIRMAR", onClick = { navHostController?.navigate(Route.COURSES.name) } )}
-    ) {
-      LazyColumn(
-        modifier = Modifier
-          .padding(it)
-          .padding(horizontal = 16.dp, vertical = 16.dp)
-      ) {
 
-        var nome = "Daniele Stein"
-        var email = "danieleastein@gmail.com"
-        var dataNascimento = "08-11-1991"
-        var cpf = "12345678910"
+    val viewModel = viewModel<ProfileViewModel>()
+    val profileState by viewModel.content.collectAsState()
 
-        item {
-          Spacer(modifier = Modifier.height(40.dp))
-          Text(text = "DADOS PESSOAIS", fontWeight = FontWeight.Bold, fontSize = 22.sp)
+    MyApplicationTheme() {
+        Scaffold(
+            topBar = { TopBarProfile(title = "JUPITER", navHostController = navHostController) },
+            bottomBar = {
+                BottomBar(
+                    title = "CONFIRMAR",
+                    onClick = { navHostController?.navigate(Route.COURSES.name) })
+            }
+        ) {
 
-          Spacer(modifier = Modifier.height(30.dp))
-          Text(text = "NOME COMPLETO", fontWeight = FontWeight.Bold, fontSize = 15.sp)
-          OutlinedTextField(
-            modifier = Modifier
-              .fillMaxWidth()
-              .background(Color(0xFFD9D9D9)),
-            value = nome,
-            onValueChange = { nome = it }
-          )
+            when (profileState) {
+                is DataResult.Empty -> LoadingIndicator()
+                is DataResult.Success -> {
 
-          Spacer(modifier = Modifier.height(15.dp))
-          Text(text = "EMAIL", fontWeight = FontWeight.Bold, fontSize = 15.sp)
-          OutlinedTextField(
-            modifier = Modifier
-              .fillMaxWidth()
-              .background(Color(0xFFD9D9D9)),
-            value = email,
-            onValueChange = { email = it }
-          )
+                    val usuario: Usuario = (profileState as DataResult.Success<Usuario>).data
 
-          Spacer(modifier = Modifier.height(15.dp))
-          Text(text = "DATA DE NASCIMENTO", fontWeight = FontWeight.Bold, fontSize = 15.sp)
-          OutlinedTextField(
-            modifier = Modifier
-              .fillMaxWidth()
-              .background(Color(0xFFD9D9D9)),
-            value = dataNascimento,
-            onValueChange = { dataNascimento = it }
-          )
 
-          Spacer(modifier = Modifier.height(15.dp))
-          Text(text = "CPF", fontWeight = FontWeight.Bold, fontSize = 15.sp)
-          OutlinedTextField(
-            modifier = Modifier
-              .fillMaxWidth()
-              .background(Color(0xFFD9D9D9)),
-            value = cpf,
-            onValueChange = { cpf }
-          )
+
+
+                    LazyColumn(
+                        modifier = Modifier
+                            .padding(it)
+                            .padding(horizontal = 16.dp, vertical = 16.dp)
+                    ) {
+
+                        var nome = usuario.nome
+                        var email = usuario.email
+                        var dataNascimento = usuario.dataNascimento
+                        var cpf = usuario.cpf
+
+                        /*var nomeCartao = usuario.cartao.first().nomeCartao
+                        var numeroCartao = usuario.cartao?.first()?.numeroCartao
+                        var dataValidade = usuario.cartao?.first()?.dataValidade*/
+
+                        var nomeCartao: String? = ""
+                        var numeroCartao: String? = ""
+                        var dataValidade: String? = ""
+
+
+                        if (usuario.cartao!!.isNotEmpty()){
+                            nomeCartao = usuario.cartao!!.first().nomeCartao
+                            numeroCartao = usuario.cartao!!.first().numeroCartao
+                            dataValidade = usuario.cartao!!.first().dataValidade
+
+                        }
+
+
+
+
+                        item {
+                            Spacer(modifier = Modifier.height(40.dp))
+                            Text(text = "DADOS PESSOAIS", fontWeight = FontWeight.Bold, fontSize = 22.sp)
+
+                            Spacer(modifier = Modifier.height(30.dp))
+                            Text(text = "NOME COMPLETO", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                            OutlinedTextField(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(Color(0xFFD9D9D9)),
+                                value = nome,
+                                onValueChange = { nome = it }
+                            )
+
+                            Spacer(modifier = Modifier.height(15.dp))
+                            Text(text = "EMAIL", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                            OutlinedTextField(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(Color(0xFFD9D9D9)),
+                                value = email,
+                                onValueChange = { email = it }
+                            )
+
+                            Spacer(modifier = Modifier.height(15.dp))
+                            Text(
+                                text = "DATA DE NASCIMENTO",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 15.sp
+                            )
+                            OutlinedTextField(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(Color(0xFFD9D9D9)),
+                                value = dataNascimento,
+                                onValueChange = { dataNascimento = it }
+                            )
+
+                            Spacer(modifier = Modifier.height(15.dp))
+                            Text(text = "CPF", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                            OutlinedTextField(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(Color(0xFFD9D9D9)),
+                                value = cpf,
+                                onValueChange = { cpf }
+                            )
+                        }
+
+
+                        item {
+                            Spacer(modifier = Modifier.height(40.dp))
+                            Text(text = "DADOS DO CARTÃO", fontWeight = FontWeight.Bold, fontSize = 22.sp)
+
+                            Spacer(modifier = Modifier.height(30.dp))
+                            Text(text = "NOME NO CARTÃO", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                            OutlinedTextField(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(Color(0xFFD9D9D9)),
+                                value = nomeCartao ?: "",
+                                onValueChange = { nomeCartao = it },
+                            )
+
+                            Spacer(modifier = Modifier.height(15.dp))
+                            Text(text = "NÚMERO DO CARTÃO", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                            OutlinedTextField(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(Color(0xFFD9D9D9)),
+                                value = numeroCartao ?: "",
+                                onValueChange = { numeroCartao = it },
+                            )
+
+                            Spacer(modifier = Modifier.height(15.dp))
+                            Text(text = "DATA DE VALIDADE", fontWeight = FontWeight.Bold, fontSize = 15.sp)
+                            OutlinedTextField(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .background(Color(0xFFD9D9D9)),
+                                value = dataValidade ?: "",
+                                onValueChange = { dataValidade = it },
+                            )
+                        }
+
+                    }
+
+
+
+                }
+
+
+                else -> Unit
+            }
+
+
+
+
+
         }
-
-        var nomeCartao = "Daniele Aline Stein"
-        var numeroCartao = "1234 2345 1234 5678"
-        var dataValidade = "24-09-2030"
-
-        item {
-          Spacer(modifier = Modifier.height(40.dp))
-          Text(text = "DADOS DO CARTÃO", fontWeight = FontWeight.Bold, fontSize = 22.sp)
-
-          Spacer(modifier = Modifier.height(30.dp))
-          Text(text = "NOME NO CARTÃO", fontWeight = FontWeight.Bold, fontSize = 15.sp)
-          OutlinedTextField(
-            modifier = Modifier
-              .fillMaxWidth()
-              .background(Color(0xFFD9D9D9)),
-            value = nomeCartao,
-            onValueChange = { nomeCartao = it },
-          )
-
-          Spacer(modifier = Modifier.height(15.dp))
-          Text(text = "NÚMERO DO CARTÃO", fontWeight = FontWeight.Bold, fontSize = 15.sp)
-          OutlinedTextField(
-            modifier = Modifier
-              .fillMaxWidth()
-              .background(Color(0xFFD9D9D9)),
-            value = numeroCartao,
-            onValueChange = { numeroCartao = it },
-          )
-
-          Spacer(modifier = Modifier.height(15.dp))
-          Text(text = "DATA DE VALIDADE", fontWeight = FontWeight.Bold, fontSize = 15.sp)
-          OutlinedTextField(
-            modifier = Modifier
-              .fillMaxWidth()
-              .background(Color(0xFFD9D9D9)),
-            value = dataValidade,
-            onValueChange = { dataValidade = it },
-          )
-        }
-
-      }
     }
-  }
 }
 
 @Composable
 @Preview
 fun ProfileScreenPreview() {
-  ProfileScreen(navHostController = null)
+    ProfileScreen(navHostController = null)
 }

@@ -9,6 +9,6 @@ data class Usuario(
     var senha: String,
     var cpf: String,
     var dataNascimento: String,
-    var cartao: List<Cartao>,
-    var pedido: List<Pedido>
+    var cartao: List<Cartao>?,
+    var pedido: List<Pedido>?
 )

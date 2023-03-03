@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.content.ContentScreen
 import br.com.jupiter.android.courses.CourseScreen
 import br.com.jupiter.android.courses.CourseScreen2

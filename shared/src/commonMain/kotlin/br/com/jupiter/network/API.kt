@@ -1,9 +1,9 @@
 package br.com.jupiter.network
 
-import br.com.jupiter.model.Conteudo
 import br.com.jupiter.model.ConteudoResponse
 import br.com.jupiter.model.Curso
 import br.com.jupiter.model.Login
+import br.com.jupiter.model.Usuario
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
@@ -49,11 +49,16 @@ class API {
         return httpClient.get("${DEFAULT_URL}/curso/id/${id}").body()
     }
 
+    suspend fun getUsuario(): List<Usuario> {
+        return httpClient.get("${DEFAULT_URL}/usuario").body()
+    }
+
 
     @ThreadLocal
     companion object {
         val instance by lazy { API() }
         var token = ""
+        var email = ""
         const val DEFAULT_URL = "https://app-jupiter.onrender.com"
     }
 

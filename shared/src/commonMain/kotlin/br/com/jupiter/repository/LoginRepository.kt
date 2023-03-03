@@ -13,11 +13,13 @@ import kotlinx.coroutines.flow.flowOn
 
 class LoginRepository(private val api: API = API.instance) {
 
+
     suspend fun getToken(login: Login) = flow<DataResult<Token>> {
         val chamada: Token = api.login(login)
 
         if (chamada.email == login.email) {
             API.token = chamada.token
+            API.email = chamada.email
             emit(DataResult.Success(chamada))
         } else {
             emit(DataResult.Empty)

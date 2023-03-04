@@ -11,18 +11,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.com.jupiter.Objects.Mock
+import br.com.jupiter.android.model.DetailScreen
+import br.com.jupiter.android.nav.Route
 import br.com.jupiter.model.Conteudo
 
 @Composable
-fun ContentItem(conteudo: Conteudo) {
+fun ContentItem(conteudo: Conteudo, navHostController: NavHostController?) {
     Column(
       verticalArrangement = Arrangement.Center,
       modifier = Modifier
-        .background(Color.White)
-        .height(250.dp)
-        .fillMaxWidth()
-        .padding()
+          .background(Color.White)
+          .height(250.dp)
+          .fillMaxWidth()
+          .padding()
     ) {
         Row(modifier = Modifier.padding(vertical = 10.dp, horizontal = 16.dp)) {
             Text(
@@ -47,7 +50,7 @@ fun ContentItem(conteudo: Conteudo) {
             )
         }
         Row(modifier = Modifier.padding(horizontal = 50.dp)) {
-            TextButton(onClick = { /*TODO*/ }) {
+            TextButton(onClick = { navHostController?.navigate(Route.VIDEO.name) }) {
                 Text(
                     text = conteudo.url,
                     fontSize = 20.sp,
@@ -64,7 +67,7 @@ fun ContentItem(conteudo: Conteudo) {
 fun ContentItemPreview() {
 
     val content = Mock.conteudo1
-    ContentItem(conteudo = content)
+    ContentItem(conteudo = content, navHostController = null)
 
 
 }

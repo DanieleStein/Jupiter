@@ -34,7 +34,7 @@ fun ContentScreen(navHostController: NavHostController?, id: Long?) {
 
     MyApplicationTheme() {
         Scaffold(
-            topBar = { TopBarPerfil(title = "JUPITER", navHostController=navHostController) },
+            topBar = { TopBarPerfil(title = "JUPITER", navHostController = navHostController) },
             containerColor = Color.Black,
         ) {
 
@@ -57,7 +57,8 @@ fun ContentScreen(navHostController: NavHostController?, id: Long?) {
                             Spacer(modifier = Modifier.height(15.dp))
                             Row(modifier = Modifier.padding(vertical = 10.dp, horizontal = 16.dp)) {
                                 Text(
-                                    text = listaDeConteudo.value.firstOrNull()?.titulo ?: "No Content",
+                                    text = listaDeConteudo.value.firstOrNull()?.titulo
+                                        ?: "No Content",
                                     fontSize = 25.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color.White
@@ -68,11 +69,13 @@ fun ContentScreen(navHostController: NavHostController?, id: Long?) {
                         items(listaDeConteudo.value.size) {
                             Spacer(modifier = Modifier.height(20.dp))
                             Card() {
-                                ContentItem(conteudo = listaDeConteudo.value[it])
+                                ContentItem(
+                                    conteudo = listaDeConteudo.value[it],
+                                    navHostController = navHostController
+                                )
                             }
                         }
                     }
-
 
 
                 }

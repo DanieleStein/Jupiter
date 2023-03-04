@@ -1,12 +1,13 @@
 package br.com.jupiter.android.login
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import android.app.Activity
+import android.content.Context
+import android.widget.Toast
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
+import androidx.compose.material.TextFieldDefaults.UnfocusedBorderThickness
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -14,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -31,33 +33,62 @@ import br.com.jupiter.android.components.BottomBar
 import br.com.jupiter.android.components.LoadingIndicator
 import br.com.jupiter.model.Login
 import br.com.jupiter.util.DataResult
+import java.util.regex.Pattern
+
 
 
 @Composable
 fun LoginScreen(
-    onHomeNavigate: () -> Unit, onCreateNavigate: () -> Unit, onRecoveryNavigate: () -> Unit
+    onHomeNavigate: () -> Unit,
+    onCreateNavigate: () -> Unit,
+    onRecoveryNavigate: () -> Unit
 ) {
     val email = remember { mutableStateOf(TextFieldValue()) }
     val senha = remember { mutableStateOf(TextFieldValue()) }
+    val erroEmail = remember { mutableStateOf(false) }
+    val erroSenha= remember { mutableStateOf(false) }
     val senhavisivel = remember { mutableStateOf(false) }
     val showDialog = remember { mutableStateOf(false) }
     val showLoading = remember { mutableStateOf(false) }
-
     val modelLogin = viewModel<LoginViewModel>()
     val loginState by modelLogin.loginState.collectAsState()
+
+    when (loginState) {
+        is DataResult.Loading -> {
+            Toast.makeText(LocalContext.current, "AGUARDE INVESTIDOR", Toast.LENGTH_SHORT).show()
+            showLoading.value = true
+            modelLogin.defaultState()
+        }
+        is DataResult.Error -> {
+            Toast.makeText(LocalContext.current, "ERRO", Toast.LENGTH_SHORT).show()
+            showDialog.value = true
+            showLoading.value = false
+            modelLogin.defaultState()
+        }
+        is DataResult.Success -> {
+            onHomeNavigate.invoke()
+            modelLogin.defaultState()
+        }
+        else -> Unit
+    }
+
+
 
     MyApplicationTheme() {
         Scaffold(bottomBar = {
             BottomBar(title = "ENTRAR") {
-                modelLogin.getLoginState(
-                    Login(email = email.value.text, senha = senha.value.text)
-                )
 
-                when (loginState) {
-                    is DataResult.Loading -> showLoading.value = true
-                    is DataResult.Error -> showDialog.value = true
-                    is DataResult.Success -> onHomeNavigate.invoke()
-                    else -> Unit
+                if (email.value.text.isBlank() || isEmailValido(email.value.text) ) {
+
+                    erroEmail.value = true
+                }
+                else if (senha.value.text.isBlank()) {
+                    erroSenha.value = true
+                }
+                else {
+                    modelLogin.getLoginState(
+                        Login(email = email.value.text, senha = senha.value.text)
+                    )
                 }
 
             }
@@ -80,21 +111,55 @@ fun LoginScreen(
 
                 OutlinedTextField(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color(0xFFD9D9D9)),
+                        .fillMaxWidth(),
                     value = email.value,
+                    singleLine = true,
+                    isError = erroEmail.value,
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = Color.White,
+                        unfocusedBorderColor = Color.White,
+                        unfocusedLabelColor = Color.White,
+                        focusedLabelColor = Color.White,
+                        textColor = Color.White,
+                        cursorColor = Color.White
+                    ),
                     label = { Text(text = "Email") },
-                    onValueChange = { email.value = it },
+                    onValueChange = {
+                        erroEmail.value = false
+                        email.value = it
+                    },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
                 )
 
+                if (erroEmail.value) {
+                    Text(
+                        text = "Email inválido ou vazio",
+                        fontSize = 14.sp,
+                        color = Color.White,
+                        modifier = Modifier
+                            .padding(start = 16.dp)
+                            .fillMaxWidth()
+                    )
+                }
+
                 Spacer(modifier = Modifier.height(20.dp))
                 OutlinedTextField(modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color(0xFFD9D9D9)),
+                    .fillMaxWidth(),
                     value = senha.value,
+                    singleLine = true,
+                    isError = erroSenha.value,
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = Color.White,
+                        unfocusedBorderColor = Color.White,
+                        unfocusedLabelColor = Color.White,
+                        focusedLabelColor = Color.White,
+                        textColor = Color.White,
+                        cursorColor = Color.White
+                    ),
                     label = { Text(text = "Senha") },
-                    onValueChange = { senha.value = it },
+                    onValueChange = {
+                        erroSenha.value = false
+                        senha.value = it },
                     visualTransformation = if (senhavisivel.value.not()) {
                         VisualTransformation.None
                     } else {
@@ -109,6 +174,16 @@ fun LoginScreen(
                             Icon(imageVector = icone, contentDescription = description)
                         }
                     })
+                if (erroSenha.value) {
+                    Text(
+                        text = "A senha não pode estar vazia",
+                        fontSize = 14.sp,
+                        color = Color.White,
+                        modifier = Modifier
+                            .padding(start = 16.dp)
+                            .fillMaxWidth()
+                    )
+                }
                 Spacer(modifier = Modifier.height(4.dp))
                 Row(
                     verticalAlignment = Alignment.CenterVertically
@@ -152,8 +227,16 @@ fun LoginScreen(
 }
 
 
+fun isEmailValido(email: String) : Boolean {
+    val REGEX = "^(.+)@(.+)\$"
+    val resultado:Boolean = Pattern.matches(REGEX, email)
+    println("IsEmailValido: $resultado")
+    return !resultado
+}
+
+
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen({ }, { }, { })
+    LoginScreen(onHomeNavigate = {}, onCreateNavigate = {}, onRecoveryNavigate = {})
 }

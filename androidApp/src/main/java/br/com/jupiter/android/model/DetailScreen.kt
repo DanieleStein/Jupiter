@@ -69,16 +69,6 @@ fun DetailContent(viewModel: VideoViewModel, lifecycle: Lifecycle.Event) {
             Uri.parse("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
         viewModel.addVideoUri(uri)
         viewModel.playVideo(uri)
-
-
-        /*Button(onClick = {
-            val uri =
-                Uri.parse("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
-            viewModel.addVideoUri(uri)
-            viewModel.playVideo(uri)
-        }) {
-            Text(text = "Carrega!")
-        }*/
     }
 }
 

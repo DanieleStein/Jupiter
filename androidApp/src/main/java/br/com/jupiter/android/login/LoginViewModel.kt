@@ -31,4 +31,8 @@ class LoginViewModel(
         }
     }
 
+    fun defaultState() {
+        _loginState.value = DataResult.Empty
+    }
+
 }

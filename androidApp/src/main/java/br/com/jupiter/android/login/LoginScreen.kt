@@ -169,9 +169,9 @@ fun LoginScreen(
                     trailingIcon = {
                         val description = if (senhavisivel.value.not()) "Visivel" else "Invisivel"
                         val icone =
-                            if (senhavisivel.value.not()) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
+                            if (senhavisivel.value.not()) Icons.Filled.Visibility  else Icons.Filled.VisibilityOff
                         IconButton(onClick = { senhavisivel.value = senhavisivel.value.not() }) {
-                            Icon(imageVector = icone, contentDescription = description)
+                            Icon(imageVector = icone, contentDescription = description, tint = Color.White)
                         }
                     })
                 if (erroSenha.value) {

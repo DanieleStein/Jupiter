@@ -48,9 +48,6 @@ dependencies {
   implementation("com.google.accompanist:accompanist-pager:0.19.0")//efeito de carrosel, seja de imagem ou conteudo, e quando deslizamos ela puxa a imagem e para na imagem
   implementation("io.coil-kt:coil-compose:2.2.2")
   implementation("androidx.core:core-splashscreen:1.0.0")//Lib da tela SplashScreen
-
-    implementation("androidx.media3:media3-exoplayer:1.0.0-rc01")
-    implementation("androidx.media3:media3-ui:1.0.0-rc01")
-
-
+  implementation("androidx.media3:media3-exoplayer:1.0.0-rc01")
+  implementation("androidx.media3:media3-ui:1.0.0-rc01")
 }

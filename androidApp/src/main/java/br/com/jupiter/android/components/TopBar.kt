@@ -81,6 +81,58 @@ fun TopBarPerfil(title: String, navHostController: NavHostController?) {
 }
 
 @Composable
+fun TopBarPerfilMain(title: String, navHostController: NavHostController?) {
+
+    val showExitDialog = remember { mutableStateOf(false) }
+
+    if (showExitDialog.value) {
+        ExitDialog(
+            onDismiss = { showExitDialog.value = !showExitDialog.value },
+            onExit = { navHostController?.popBackStack() }
+        )
+    }
+
+
+
+    TopAppBar(
+        title = {
+            Text(
+                text = title,
+                fontWeight = FontWeight.Bold,
+                fontSize = 36.sp,
+                color = Color.White
+            )
+        },
+        navigationIcon = {
+            IconButton(onClick = { showExitDialog.value = !showExitDialog.value }) {
+                Icon(Icons.Filled.ArrowBack, "backIcon", tint = Color.White)
+            }
+        },
+
+        actions = {
+
+            IconButton(onClick = {
+                navHostController?.navigate(Route.PROFILE.name)
+            }) {
+                Image(
+                    painter = painterResource(R.drawable.ic_profile2),
+                    contentDescription = "Profile",
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                        .height(40.dp)
+                        .clip(CircleShape)
+                )
+            }
+
+        },
+        backgroundColor = Color(0xFF0051EF)
+    )
+}
+
+
+
+
+@Composable
 fun TopBarCourse(
     titulo: String,
     navHostController: NavHostController?,

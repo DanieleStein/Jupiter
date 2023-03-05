@@ -218,7 +218,7 @@ fun LoginScreen(
 
                 AlertDialogComponent(openDialog = showDialog.value,
                     title = "Erro",
-                    message = "Login e/ou senha errada!",
+                    message = "Falha ao fazer login! Tente novamente!",
                     onDismissRequest = { showDialog.value = false })
 
             }

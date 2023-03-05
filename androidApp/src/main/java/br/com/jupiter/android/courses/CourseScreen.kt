@@ -48,7 +48,7 @@ fun CourseScreen(
     MyApplicationTheme {
         Scaffold(
             topBar = {
-                TopBarPerfil(
+                TopBarPerfilMain(
                     title = "JUPITER",
                     navHostController = navHostController
                 )

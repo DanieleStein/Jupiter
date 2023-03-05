@@ -105,7 +105,7 @@ fun Navigator(
         }
 
         composable(Route.VIDEO.name) {
-            DetailScreen()
+            DetailScreen( navHostController = navHostController )
         }
 
     }

@@ -21,13 +21,14 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.TopBar
 import br.com.jupiter.android.components.TopBar1Preview
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun DetailScreen() {
+fun DetailScreen( navHostController: NavHostController? ) {
 
     val viewModel = viewModel<VideoViewModel>()
     var lifecycle by remember { mutableStateOf(Lifecycle.Event.ON_CREATE) }
@@ -50,7 +51,7 @@ fun DetailScreen() {
     }
     MyApplicationTheme() {
       Scaffold(
-        topBar = { TopBar(title = "JUPITER", navHostController = null) },
+        topBar = { TopBar (title = "JUPITER", navHostController = navHostController) },
         content = { DetailContent(viewModel, lifecycle) },
         backgroundColor = Color.Black,
       )
@@ -75,5 +76,5 @@ fun DetailContent(viewModel: VideoViewModel, lifecycle: Lifecycle.Event) {
 @Preview
 @Composable
 fun DetailScreenPreiew() {
-  DetailScreen()
+  DetailScreen( navHostController = null )
 }

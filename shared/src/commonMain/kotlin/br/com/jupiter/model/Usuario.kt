@@ -1,4 +1,5 @@
 package br.com.jupiter.model
+import br.com.jupiter.util.DateSerializer
 import kotlinx.serialization.Serializable
 
 @Serializable

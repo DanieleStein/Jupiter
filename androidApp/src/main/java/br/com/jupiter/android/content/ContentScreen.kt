@@ -2,17 +2,14 @@ package br.com.jupiter.android.content
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Text
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Card
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import br.com.jupiter.android.MyApplicationTheme
@@ -51,7 +48,7 @@ fun ContentScreen(navHostController: NavHostController?, id: Long?) {
           ) {
 
 
-            item {
+            /*item {
               Spacer(modifier = Modifier.height(15.dp))
               Row(modifier = Modifier.padding(vertical = 10.dp, horizontal = 16.dp)) {
                 Text(
@@ -62,7 +59,7 @@ fun ContentScreen(navHostController: NavHostController?, id: Long?) {
                   color = Color.White
                 )
               }
-            }
+            }*/
 
             items(listaDeConteudo.value.size) {
               Spacer(modifier = Modifier.height(20.dp))

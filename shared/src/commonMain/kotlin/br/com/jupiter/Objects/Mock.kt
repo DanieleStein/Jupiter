@@ -90,7 +90,6 @@ object Mock {
     )
 
 
-
     val usuario: Usuario = Usuario(
         id = 1,
         nome = "Daniele Stein",
@@ -110,13 +109,12 @@ object Mock {
         usuario = usuario
     )
 
-
-
-
-
-
-
-
+    val listaVideos: List<String> = listOf(
+        "https://cdn.coverr.co/videos/coverr-a-man-counting-money-9403/1080p.mp4",
+        "https://cdn.coverr.co/videos/coverr-a-trader-writing-something-in-a-notebook-7909/1080p.mp4",
+        "https://cdn.coverr.co/videos/coverr-opening-an-nft-image-on-the-opensea-marketplace-9724/1080p.mp4",
+        "https://cdn.coverr.co/videos/coverr-a-girl-searches-for-nft-data-using-her-laptop-and-a-smartphone-app-7544/1080p.mp4"
+    )
 
 
 }

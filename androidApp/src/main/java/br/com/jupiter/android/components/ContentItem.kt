@@ -26,54 +26,61 @@ import br.com.jupiter.model.Conteudo
 import br.com.jupiter.model.Curso
 
 @Composable
-fun ContentItem(conteudo: Conteudo, navHostController: NavHostController?) {
-  Column(
-    verticalArrangement = Arrangement.Center,
-    modifier = Modifier
-      .background(Color.White)
-      .height(250.dp)
-      .fillMaxWidth()
-      .padding(horizontal = 10.dp, vertical = 10.dp)
-  ) {
-    Row() {
-      Text(
-        text = "${conteudo.ordemConteudo} - ",
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Bold,
-        color = Color(0xFF0051EF)
-      )
-      Text(
-        text = conteudo.titulo,
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Bold,
-        color = Color(0xFF0051EF)
-      )
+fun ContentItem(
+    conteudo: Conteudo,
+    navHostController: NavHostController?
+) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .background(Color.White)
+            .height(250.dp)
+            .fillMaxWidth()
+            .padding(horizontal = 10.dp, vertical = 10.dp)
+    ) {
+        Row() {
+            Text(
+                text = "${conteudo.ordemConteudo} - ",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF0051EF)
+            )
+            Text(
+                text = conteudo.titulo,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF0051EF)
+            )
+        }
+
+        Spacer(modifier = Modifier.padding(10.dp))
+        Text(
+            text = conteudo.descricao,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
+        )
+
+        Spacer(modifier = Modifier.padding(10.dp))
+        TextButton(onClick = {
+            val rota = "${Route.VIDEO}/${conteudo.ordemConteudo}"
+            println("CONTENTITEM: $rota")
+            navHostController?.navigate(rota)
+        }) {
+            Text(
+                text = "Clique Aqui!",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
+        }
+
+        val checkedState = remember { mutableStateOf(false) }
+        Switch(
+            checked = checkedState.value,
+            onCheckedChange = { checkedState.value = it },
+        )
     }
-
-    Spacer(modifier = Modifier.padding(10.dp))
-    Text(
-      text = conteudo.descricao,
-      fontSize = 16.sp,
-      fontWeight = FontWeight.Bold,
-      color = Color.Black
-    )
-
-    Spacer(modifier = Modifier.padding(10.dp))
-    TextButton(onClick = { navHostController?.navigate(Route.VIDEO.name) }) {
-      Text(
-        text = conteudo.url,
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Bold,
-        color = Color.Black
-      )
-    }
-
-    val checkedState = remember { mutableStateOf(false) }
-    Switch(
-      checked = checkedState.value,
-      onCheckedChange = { checkedState.value = it },
-    )
-  }
 }
 
 

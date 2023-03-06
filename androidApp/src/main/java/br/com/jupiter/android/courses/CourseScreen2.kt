@@ -28,9 +28,6 @@ import br.com.jupiter.model.Curso
 @Composable
 fun CourseScreen2(categoria: String, cursos: List<Curso>, navHostController: NavHostController?) {
 
-/*  val viewModel = viewModel<CourseViewModel>()
-  val cursos by viewModel.cursos.collectAsState()*/
-
     MyApplicationTheme() {
         Scaffold(
             topBar = {

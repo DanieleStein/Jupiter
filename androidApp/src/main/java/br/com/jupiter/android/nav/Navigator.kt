@@ -6,18 +6,17 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.content.ContentScreen
 import br.com.jupiter.android.courses.CourseScreen
 import br.com.jupiter.android.courses.CourseScreen2
 import br.com.jupiter.android.login.LoginScreen
 import br.com.jupiter.android.model.DetailScreen
-import br.com.jupiter.android.model.VideoItem
 import br.com.jupiter.android.orders.OrderScreen
 import br.com.jupiter.android.profile.ProfileScreen
 import br.com.jupiter.android.recoverPassword.RecoverPasswordScreen
 import br.com.jupiter.android.registerPayment.RegisterPaymentScreen
 import br.com.jupiter.android.registerUser1.RegisterUserScreen
+import br.com.jupiter.model.Conteudo
 import br.com.jupiter.model.Curso
 import br.com.jupiter.util.DataResult
 
@@ -33,6 +32,7 @@ fun Navigator(
     initial: Route = Route.LOGIN
 ) {
     val cursos = remember { mutableStateOf(emptyList<Curso>()) }
+    val conteudos = remember { mutableStateOf(emptyList<Conteudo>()) }
 
     NavHost(
         navController = navHostController,
@@ -69,8 +69,21 @@ fun Navigator(
         composable("${Route.CONTENT}/{conteudo}") {
             val conteudo = it.arguments?.getString("conteudo")?.toLong()
             if (conteudo != null) {
-                ContentScreen(navHostController = navHostController, id = conteudo)
+                ContentScreen(
+                    navHostController = navHostController,
+                    id = conteudo
+                )
             }
+        }
+
+        composable("${Route.VIDEO}/{ordemConteudo}"){
+            val ordemConteudo = it.arguments?.getString("ordemConteudo")?.toInt()
+
+            DetailScreen(
+                navHostController = navHostController,
+                ordemConteudo = ordemConteudo ?: 1
+            )
+
         }
 
         composable(Route.RECOVERY.name) {
@@ -104,9 +117,7 @@ fun Navigator(
             )
         }
 
-        composable(Route.VIDEO.name) {
-            DetailScreen( navHostController = navHostController )
-        }
+
 
     }
 

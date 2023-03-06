@@ -8,8 +8,6 @@ data class Cartao(
     val nomeCartao: String,
     val numeroCartao: String,
     val codSeguranca: String,
-    val dataValidade: String,
-    val usuario: Usuario?
-) {
-
-}
+    val dataValidade: String
+    //val usuario: Usuario?
+)

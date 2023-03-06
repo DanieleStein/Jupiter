@@ -48,8 +48,21 @@ fun ProfileScreen(navHostController: NavHostController?) {
                 is DataResult.Success -> {
 
                     val usuario: Usuario = (profileState as DataResult.Success<Usuario>).data
+                    var nome = usuario.nome
+                    var email = usuario.email
+                    var dataNascimento = usuario.dataNascimento
+                    var cpf = usuario.cpf
 
+                    var nomeCartao: String? = ""
+                    var numeroCartao: String? = ""
+                    var dataValidade: String? = ""
 
+                    if (usuario.cartao!!.isNotEmpty()){
+                        nomeCartao = usuario.cartao!!.first().nomeCartao
+                        numeroCartao = usuario.cartao!!.first().numeroCartao
+                        dataValidade = usuario.cartao!!.first().dataValidade
+
+                    }
 
 
                     LazyColumn(
@@ -57,30 +70,6 @@ fun ProfileScreen(navHostController: NavHostController?) {
                             .padding(it)
                             .padding(horizontal = 16.dp, vertical = 16.dp)
                     ) {
-
-                        var nome = usuario.nome
-                        var email = usuario.email
-                        var dataNascimento = usuario.dataNascimento
-                        var cpf = usuario.cpf
-
-                        /*var nomeCartao = usuario.cartao.first().nomeCartao
-                        var numeroCartao = usuario.cartao?.first()?.numeroCartao
-                        var dataValidade = usuario.cartao?.first()?.dataValidade*/
-
-                        var nomeCartao: String? = ""
-                        var numeroCartao: String? = ""
-                        var dataValidade: String? = ""
-
-
-                        if (usuario.cartao!!.isNotEmpty()){
-                            nomeCartao = usuario.cartao!!.first().nomeCartao
-                            numeroCartao = usuario.cartao!!.first().numeroCartao
-                            dataValidade = usuario.cartao!!.first().dataValidade
-
-                        }
-
-
-
 
                         item {
                             Spacer(modifier = Modifier.height(40.dp))

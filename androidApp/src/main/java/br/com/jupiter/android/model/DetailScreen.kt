@@ -5,35 +5,35 @@ import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.MyApplicationTheme
 import br.com.jupiter.android.components.TopBar
-import br.com.jupiter.android.components.TopBar1Preview
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun DetailScreen( navHostController: NavHostController? ) {
+fun DetailScreen(
+    navHostController: NavHostController?,
+    ordemConteudo: Int
+) {
 
     val viewModel = viewModel<VideoViewModel>()
     var lifecycle by remember { mutableStateOf(Lifecycle.Event.ON_CREATE) }
     val currentView = LocalView.current
     val lifecycleOwner = LocalLifecycleOwner.current
+
+    val listaURL = Mock.listaVideos
+
 
     DisposableEffect(key1 = lifecycleOwner) {
         viewModel.initPlayer(currentView.context)
@@ -49,25 +49,31 @@ fun DetailScreen( navHostController: NavHostController? ) {
         }
 
     }
+
     MyApplicationTheme() {
-      Scaffold(
-        topBar = { TopBar (title = "JUPITER", navHostController = navHostController) },
-        content = { DetailContent(viewModel, lifecycle) },
-        backgroundColor = Color.Black,
-      )
+        Scaffold(
+            topBar = { TopBar(title = "JUPITER", navHostController = navHostController) },
+            content = {
+                DetailContent(
+                    viewModel = viewModel,
+                    lifecycle = lifecycle,
+                    url = listaURL[ordemConteudo]
+                )
+            },
+            backgroundColor = Color.Black,
+        )
     }
 }
 
 @Composable
-fun DetailContent(viewModel: VideoViewModel, lifecycle: Lifecycle.Event) {
+fun DetailContent(viewModel: VideoViewModel, lifecycle: Lifecycle.Event, url: String) {
     Column(
-      modifier = Modifier.fillMaxSize(),
-      verticalArrangement = Arrangement.Center,
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
     ) {
         viewModel.player?.let { CustomPlayer(player = it, lifecycle = lifecycle) }
 
-        val uri =
-            Uri.parse("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
+        val uri = Uri.parse(url)
         viewModel.addVideoUri(uri)
         viewModel.playVideo(uri)
     }
@@ -75,6 +81,6 @@ fun DetailContent(viewModel: VideoViewModel, lifecycle: Lifecycle.Event) {
 
 @Preview
 @Composable
-fun DetailScreenPreiew() {
-  DetailScreen( navHostController = null )
+fun DetailScreenPreview() {
+    DetailScreen(navHostController = null, ordemConteudo = 1)
 }

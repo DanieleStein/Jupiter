@@ -23,6 +23,7 @@ import androidx.navigation.NavHostController
 import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.nav.Route
 import br.com.jupiter.model.Conteudo
+import br.com.jupiter.model.Curso
 
 @Composable
 fun ContentItem(conteudo: Conteudo, navHostController: NavHostController?) {
@@ -32,7 +33,7 @@ fun ContentItem(conteudo: Conteudo, navHostController: NavHostController?) {
       .background(Color.White)
       .height(250.dp)
       .fillMaxWidth()
-      .padding(horizontal = 16.dp, vertical = 20.dp)
+      .padding(horizontal = 10.dp, vertical = 10.dp)
   ) {
     Row() {
       Text(
@@ -67,22 +68,12 @@ fun ContentItem(conteudo: Conteudo, navHostController: NavHostController?) {
       )
     }
 
-    Row(
-      modifier = Modifier.padding(horizontal = 330.dp)
-    ) {
-      SwitchDemo()
-    }
-
+    val checkedState = remember { mutableStateOf(false) }
+    Switch(
+      checked = checkedState.value,
+      onCheckedChange = { checkedState.value = it },
+    )
   }
-}
-
-@Composable
-fun SwitchDemo() {
-  val checkedState = remember { mutableStateOf(false) }
-  Switch(
-    checked = checkedState.value,
-    onCheckedChange = { checkedState.value = it },
-  )
 }
 
 

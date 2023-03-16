@@ -3,12 +3,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Usuario(
-    var id: Long,
-    var nome: String,
-    var email: String,
-    var senha: String,
-    var cpf: String,
-    var dataNascimento: String,
-    var cartao: List<Cartao>,
-    var pedido: List<Pedido>
+    val id: Long,
+    val nome: String,
+    val email: String,
+    val senha: String,
+    val cpf: String,
+    val dataNascimento: String,
+    val cartao: List<Cartao>?,
+    val pedido: List<Pedido>?
 )

@@ -29,10 +29,10 @@ fun AlertDialogComponent(
                 TextButton(
                     onClick = onDismissRequest
                 ) {
-                    Text(text = "OK")
+                    Text(text = "OK", color = Color.White)
                 }
             },
-            backgroundColor = Color(0xFF072F5A),
+            backgroundColor = Color(0xFF0051EF),
             contentColor = Color.White
         )
     }

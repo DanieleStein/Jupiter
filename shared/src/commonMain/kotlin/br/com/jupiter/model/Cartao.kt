@@ -9,7 +9,5 @@ data class Cartao(
     val numeroCartao: String,
     val codSeguranca: String,
     val dataValidade: String,
-    val usuario: Usuario
-) {
-
-}
+    val usuario: Usuario? = null
+)

@@ -22,10 +22,17 @@ class LoginViewModel(
         MutableStateFlow(DataResult.Empty)
     val loginState: StateFlow<DataResult<Token>> = _loginState
 
+
+
+
     fun getLoginState(login: Login) = viewModelScope.launch {
         repository.getToken(login).collectLatest {
             _loginState.value = it
         }
+    }
+
+    fun defaultState() {
+        _loginState.value = DataResult.Empty
     }
 
 }

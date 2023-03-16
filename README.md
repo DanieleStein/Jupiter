@@ -14,7 +14,7 @@ Usamos o Figma para projetar o designer das nossas telas do App.
 Nosso App foi feito no AndroidStudio, ele é uma aplicação multiplataforma (Kmm), pode ser lançada tanto em Android quanto em Ios. Para desenvolver as
 telas usamos Jetpack Compose.
 
-Nossa tela de vídeo foi tratado para quando acontecer a rotação da tela, ele não perca o estado atual do vídeo, e sempre continue de onde ele parou. 
+Nossa tela de vídeo foi tratada para quando acontecer a rotação da tela, ela não perca o estado atual do vídeo, e sempre continue de onde ela parou. 
 Também quando recebemos uma ligação, o vídeo pausa, e quando encerrada a ligação o vídeo também retorna de onde parou.
 
 Acesso a nossa API - https://github.com/DanieleStein/ProjetoJupiter

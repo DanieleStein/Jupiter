@@ -33,8 +33,8 @@ fun ContentItem(
     Column(
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
-            .background(Color.White)
-            .height(250.dp)
+            .background(Color(0xFF5091F2))
+            .height(210.dp)
             .fillMaxWidth()
             .padding(horizontal = 10.dp, vertical = 10.dp)
     ) {
@@ -43,13 +43,13 @@ fun ContentItem(
                 text = "${conteudo.ordemConteudo} - ",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF0051EF)
+                color = Color.White
             )
             Text(
                 text = conteudo.titulo,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF0051EF)
+                color = Color.White
             )
         }
 
@@ -58,7 +58,7 @@ fun ContentItem(
             text = conteudo.descricao,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Black
+            color = Color.White
         )
 
         Spacer(modifier = Modifier.padding(10.dp))

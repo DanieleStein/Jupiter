@@ -53,7 +53,7 @@ fun CourseScreen(
                     navHostController = navHostController
                 )
             },
-            containerColor = Color.Black,
+            containerColor = Color(0x7D0051EF)
         ) {
 
 
@@ -80,7 +80,7 @@ fun CourseScreen(
                                         top = 16.dp,
                                         end = 16.dp
                                     )
-                                    .background(Color.Black)
+                                    .background(Color(0x7D0051EF))
                                     .fillMaxWidth(),
                                 label = {
                                     Text(text = "Curso", color = Color.White)
@@ -102,8 +102,8 @@ fun CourseScreen(
                             for (categoria in categorias) {
                                 item {
                                     Row(
-                                        modifier = Modifier.padding(20.dp),//Espaço entre as bordas do Texto
-                                        verticalAlignment = Alignment.CenterVertically //alinhados na vertical
+                                        modifier = Modifier.padding(20.dp),
+                                        verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Text(
                                             text = categoria.nome,
@@ -111,7 +111,7 @@ fun CourseScreen(
                                             fontWeight = FontWeight.Bold,
                                             color = Color.White
                                         )
-                                        Spacer(modifier = Modifier.weight(1f)) //espaço entre a escrita e a seta
+                                        Spacer(modifier = Modifier.weight(1f))
                                         IconButton(onClick = {
                                             onCategoryDetail.invoke(categoria.name)
                                         }) {

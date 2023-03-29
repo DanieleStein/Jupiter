@@ -35,7 +35,7 @@ fun CourseScreen2(categoria: String, cursos: List<Curso>, navHostController: Nav
                     title = "JUPITER", navHostController = navHostController
                 )
             },
-            containerColor = Color.Black
+            containerColor = Color(0x7D0051EF)
         ) { curso ->
 
             LazyColumn(

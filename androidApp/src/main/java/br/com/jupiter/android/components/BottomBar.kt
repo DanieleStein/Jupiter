@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun BottomBar(title: String, onClick: () -> Unit) {
-  BottomAppBar(backgroundColor = Color(0xFF20B2AA)) {
+  BottomAppBar(backgroundColor = Color(0xFF00A2AA)) {
     TextButton(onClick = onClick) {
       Text(
         text = title,

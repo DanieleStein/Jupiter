@@ -14,9 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -28,11 +26,8 @@ import androidx.navigation.NavHostController
 import br.com.jupiter.Objects.Mock
 import br.com.jupiter.android.R
 import br.com.jupiter.android.nav.Route
-import br.com.jupiter.model.Categorias
 import br.com.jupiter.model.Curso
 import br.com.jupiter.util.DataResult
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
@@ -44,43 +39,47 @@ fun CardCourse(
   onCardNavigation: (Long) -> Unit,
   navHostController: NavHostController?
 ) {
-  val painter = rememberAsyncImagePainter(
-    model =
-    ImageRequest.Builder(LocalContext.current)
-      .data("https://picsum.photos/200/300?random=2")
-      .size(60)
-      .build()
-  )
+  //val painter = rememberAsyncImagePainter(
+   // model =
+   // ImageRequest.Builder(LocalContext.current)
+    //  .data("https://picsum.photos/200/300?random=2")
+    //  .size(60)
+    //  .build()
+  //)
 
   Column(
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally,
     modifier = Modifier
-      .background(Color.White)
+      .background(Color(0xFF5091F2))
       .height(116.dp)
       .padding(horizontal = 32.dp)
       .clickable {}
   ) {
     Card() {
-      TextButton(onClick = {
+      TextButton(
+        modifier = Modifier.background(Color(0xFF5091F2)),
+        onClick = {
         //onCardNavigation.invoke(curso.id)
 
         navHostController?.navigate("${Route.CONTENT}/${curso.id}")
       }) {
         Row(
+          modifier = Modifier
+            .background(Color(0xFF5091F2)),
           verticalAlignment = Alignment.CenterVertically
         ) {
           Column(
             horizontalAlignment = Alignment.CenterHorizontally,
           ) {
             Image(
-              painter = painter,
+              painter = painterResource(id = R.drawable.porquinho),
               //painter = painterResource(id = R.drawable.porqueinho),
               contentDescription = "Dinheiro",
               contentScale = ContentScale.Crop,
               modifier = Modifier
                 .height(70.dp)
-                .width(70.dp)
+                .width(50.dp)
                 .clip(CircleShape)
             )
           }
@@ -89,7 +88,7 @@ fun CardCourse(
             curso!!.titulo,
             fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.Black,
+            color = Color.White,
             textAlign = TextAlign.Center
           )
         }

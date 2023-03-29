@@ -29,7 +29,7 @@ fun ContentScreen(navHostController: NavHostController?, id: Long?) {
     MyApplicationTheme {
         Scaffold(
             topBar = { TopBarPerfil(title = "JUPITER", navHostController = navHostController) },
-            containerColor = Color.Black,
+            containerColor = Color(0x7D0051EF),
         ) {
 
             when (contents) {

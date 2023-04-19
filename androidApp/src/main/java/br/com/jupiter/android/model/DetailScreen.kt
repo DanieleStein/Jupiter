@@ -60,7 +60,7 @@ fun DetailScreen(
                     url = listaURL[ordemConteudo]
                 )
             },
-            backgroundColor = Color.Black,
+            backgroundColor = Color(0x7D0051EF),
         )
     }
 }
